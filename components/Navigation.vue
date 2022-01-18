@@ -2,12 +2,17 @@
 	<nav class="uk-navbar-container" uk-navbar>
 		<div class="uk-navbar-left">
 
+			<nuxt-link to="/" class="uk-navbar-item uk-logo">
+				Cartas
+			</nuxt-link>
+
 			<ul class="uk-navbar-nav">
-				<li>
-					<nuxt-link to="/">
-						Inicio
+				<li v-for="culture in cultures.data" v-bind:key="culture.attributes.id">
+					<nuxt-link :to="{ path: '/cultures/' + culture.id }">
+						{{ culture.attributes.name }}
 					</nuxt-link>
 				</li>
+
 				<li v-for="card in cards.data" v-bind:key="card.attributes.id">
 					<nuxt-link :to="{ path: '/cards/' + card.id }">
 						{{ card.attributes.title }}
@@ -20,16 +25,23 @@
 </template>
 
 <script>
+	import {culturesQuery} from '~/graphql/query'
 	import {cardsQuery} from '~/graphql/query'
 
 	export default {
 		data() {
 			return {
+				api_url: "http://localhost:1337",
+				cultures: [],
 				cards: [],
 			}
 		},
 
 		apollo: {
+			cultures: {
+				prefetch: true,
+				query: culturesQuery,
+			},
 			cards: {
 				prefetch: true,
 				query: cardsQuery,

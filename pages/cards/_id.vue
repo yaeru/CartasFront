@@ -9,7 +9,7 @@
 
 					<div class="uk-width-4-5@m">
 						<h2 class="uk-margin-remove-bottom">
-							{{ card.data.attributes.culture }}
+							{{ card.data.attributes.culture.data.attributes.name }}
 						</h2>
 						<h1 class="uk-heading-medium uk-margin-remove-top">
 							{{ card.data.attributes.title }}
@@ -23,7 +23,7 @@
 		</header>
 		<div class="uk-section">
 			<div class="uk-container">
-				<div class="uk-column-1-2 uk-dropcap" v-html="$md.render(card.data.attributes.description)"></div>
+				<div class="uk-column-1-2@m uk-dropcap" v-html="$md.render(card.data.attributes.description)"></div>
 			</div>
 		</div>
 	</section>
@@ -31,19 +31,23 @@
 
 <script>
 	import {cardQuery} from '~/graphql/query'
-	
 	var moment = require('moment')
 
 	export default {
 		components: {
 		},
+		head() {
+			return {
+				//title: this.card.data.attributes.title + " - " + this.siteTitle,
+			}
+		},
 		data() {
 			return {
-				api_url: "http://localhost:1337",
 				loading: 0,
+				siteTitle: "Cartas CMS",
+				api_url: "http://localhost:1337",
 				card: [],
 				moment: moment,
-				//api_url: process.env.STRAPI_URL
 			}
 		},
 		apollo: {

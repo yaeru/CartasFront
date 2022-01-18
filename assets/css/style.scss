@@ -32,3 +32,13 @@ $border-rounded-border-radius:                   $global-radius-m;
 // 4. Import UIkit.
 @import "../../node_modules/uikit/src/scss/uikit-theme.scss";
 
+// NUXT transition
+
+.page-enter-active,
+.page-leave-active {
+	transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+	opacity: 0;
+}
