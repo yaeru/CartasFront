@@ -1,0 +1,34 @@
+// 1. Your custom variables and variable overwrites.
+
+// Background:
+
+// Used in grid, column, container, align, card, padding
+$global-gutter:                                  30px !default;
+$global-small-gutter:                            15px !default;
+$global-medium-gutter:                           40px !default;
+$global-large-gutter:                            70px !default;
+
+
+// Radius
+$global-radius:                     			 30px;
+$global-radius-xs:                     			 round($global-radius / 5);
+$global-radius-s:                     			 round($global-radius / 3);
+$global-radius-m:                     			 round($global-radius / 1.7);
+$global-radius-l:                     			 round($global-radius * 2);
+$border-rounded-border-radius:                   $global-radius-m;
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+
+// 2. Import default variables and available mixins.
+@import "../../node_modules/uikit/src/scss/variables-theme.scss";
+@import "../../node_modules/uikit/src/scss/mixins-theme.scss";
+
+// 3. Your custom mixin overwrites.
+
+
+// 4. Import UIkit.
+@import "../../node_modules/uikit/src/scss/uikit-theme.scss";
+
