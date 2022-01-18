@@ -34,13 +34,13 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: ['@nuxtjs/strapi'],
-  /*strapi: {
+  strapi: {
     // Options
     url: process.env.STRAPI_URL || 'http://localhost:1337',
     entities: ['cards'],
     prefix: '/api',
     version: 'v4'
-  },*/
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -52,6 +52,7 @@ export default {
     clientConfigs: {
       default: {
         httpEndpoint: 'http://localhost:1337/graphql',
+        baseUrl: 'http://localhost:1337',
       }
     }
   },

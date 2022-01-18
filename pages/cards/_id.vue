@@ -2,16 +2,23 @@
 	<section v-if="!loading">
 		<header class="uk-section uk-section-muted">
 			<div class="uk-container">
-				
-				<h2 class="uk-margin-remove-bottom">
-					{{ card.data.attributes.culture }}
-				</h2>
-				<h1 class="uk-heading-medium uk-margin-remove-top">
-					{{ card.data.attributes.title }}
-				</h1>
-				<p class="uk-text-lead">
-					{{ card.data.attributes.shortDescription }}
-				</p>
+				<div class="uk-grid" uk-grid >
+					<div class="uk-width-1-5@m">
+						<img :src="api_url + card.data.attributes.cover.data.attributes.url" :alt="card.data.attributes.cover.data.attributes.alternativeText" />
+					</div>
+
+					<div class="uk-width-4-5@m">
+						<h2 class="uk-margin-remove-bottom">
+							{{ card.data.attributes.culture }}
+						</h2>
+						<h1 class="uk-heading-medium uk-margin-remove-top">
+							{{ card.data.attributes.title }}
+						</h1>
+						<p class="uk-text-lead">
+							{{ card.data.attributes.shortDescription }}
+						</p>
+					</div>
+				</div>
 			</div>
 		</header>
 		<div class="uk-section">
@@ -32,6 +39,7 @@
 		},
 		data() {
 			return {
+				api_url: "http://localhost:1337",
 				loading: 0,
 				card: [],
 				moment: moment,

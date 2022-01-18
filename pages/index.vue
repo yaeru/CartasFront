@@ -6,11 +6,7 @@
 				<article v-for="card in cards.data" v-bind:key="card.attributes.id">
 					<div class="uk-card uk-card-default" v-bind:class="card.attributes.culture" >
 						<div class="uk-card-header uk-card-deck">
-							<p>
-								{{ card.attributes.cover.data.attributes.caption }}
-							</p>
-
-							<!--<img :src="api_url + card.attributes.cover.data.attributes.url" />-->
+							<img :src="api_url + card.attributes.cover.data.attributes.url" />
 
 							<h2 class="uk-card-title uk-margin-remove-bottom">
 								{{card.attributes.title}}
