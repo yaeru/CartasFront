@@ -42,3 +42,16 @@ $border-rounded-border-radius:                   $global-radius-m;
 .page-leave-to {
 	opacity: 0;
 }
+
+.uk-background-success {
+	background-color: #32d296;
+	* {
+		color: #fff;
+	}
+}
+.uk-background-danger {
+	background-color: #f0506e;
+	* {
+		color: #fff;
+	}
+}

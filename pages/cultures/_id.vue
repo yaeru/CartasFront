@@ -11,26 +11,22 @@
 			</div>
 		</header>
 
-		<!-- <section class="uk-section">
+		<section class="uk-section">
 			<div class="uk-container">
-				<CardList :cards="culture.cards || []" ></CardList>
+				<CardList :cards="culture.data.attributes.cards || []" ></CardList>
 			</div>
-		</section> -->
-		
+		</section>
+
 	</section>
 </template>
 
 <script>
 	import {cultureQuery} from '~/graphql/query';
-	//import CardList from '@/components/CardList';
 	
 	var moment = require('moment')
 
 	export default {
 		name: 'CultureIndex',
-		components: {
-			//CardList,
-		},
 		head() {
 			return {
 				//title: this.culture.data.attributes.name + " - " + this.siteTitle,
@@ -38,7 +34,7 @@
 		},
 		data() {
 			return {
-				siteTitle: "Cartas CMS",
+				siteTitle: "Cartas CMS pepe",
 				api_url: "http://localhost:1337",
 				culture: [],
 				loading: 0,
@@ -54,6 +50,19 @@
 					return { id: parseInt(this.$route.params.id) }
 				}
 			},
-		}
+		},
+		mounted: function() {
+			setTimeout(function(){
+				var card = culture.data.attributes.cards.find(card => card.id == 2)
+                var randomCard = this.culture.data.attributes.cards[Math.floor(Math.random()*this.culture.data.attributes.cards.length)]
+                console.log('es mas fuerte?', card.id > randomCard.id);
+			}, 3000);
+		},
+		methods:{
+            /* function que dado un id, compare la fuerza entre la card con ese id y una random */
+            compare(id){
+                
+            },
+        },
 	}
 </script>

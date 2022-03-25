@@ -11,13 +11,22 @@
 					<nuxt-link :to="{ path: '/cultures/' + culture.id }">
 						{{ culture.attributes.name }}
 					</nuxt-link>
+					<div class="uk-navbar-dropdown">
+						<ul class="uk-nav uk-navbar-dropdown-nav">
+							<li v-for="card in culture.attributes.cards.data" v-bind:key="card.id">
+								 <nuxt-link :to="{ path: '/cards/' + card.id }">
+									{{ card.attributes.title }}
+								</nuxt-link> 
+							</li>
+						</ul>
+					</div>
 				</li>
 
-				<li v-for="card in cards.data" v-bind:key="card.attributes.id">
+				<!-- <li v-for="card in cards.data" v-bind:key="card.attributes.id">
 					<nuxt-link :to="{ path: '/cards/' + card.id }">
 						{{ card.attributes.title }}
 					</nuxt-link>
-				</li>
+				</li> -->
 			</ul>
 
 		</div>

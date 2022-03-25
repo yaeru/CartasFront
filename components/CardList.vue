@@ -2,7 +2,6 @@
 	<div class="uk-grid uk-child-width-1-2 uk-child-width-1-3@m" uk-grid uk-height-match="target: .uk-card-body">
 		<article v-for="card in cards.data" v-bind:key="card.attributes.id">
 			<div class="uk-card uk-card-default uk-card-small" v-bind:class="card.attributes.culture" >
-
 				<div class="uk-card-header">
 					<div class="uk-grid-small uk-flex-middle" uk-grid>
 						<div class="uk-width-auto">
@@ -25,12 +24,15 @@
 				</div>
 
 				<div class="uk-card-footer uk-text-right">
-					<a :href="'#modal-' + card.attributes.title" uk-toggle class="uk-button uk-button-default uk-button-small">
+					<button v-on:click="$emit('playCard',card.id)" class="uk-button uk-button-primary uk-width-1-1">
+						Comparar id: {{ card.id }}
+					</button>
+					<!-- <a :href="'#modal-' + card.attributes.title" uk-toggle class="uk-button uk-button-default uk-button-small">
 						modal
 					</a>
 					<NuxtLink :to="{ path: '/cards/' + card.id }" class="uk-button uk-button-primary uk-button-small">
 						more info
-					</NuxtLink>
+					</NuxtLink> -->
 				</div>
 			</div>
 			<modal :id="'modal-' + card.attributes.title" uk-modal>
@@ -71,6 +73,6 @@
 			return {
 				api_url: "http://localhost:1337",
 			}
-		},
+		}
 	}
 </script>
