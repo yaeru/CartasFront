@@ -1,7 +1,7 @@
 <template>
-	<nav class="uk-navbar-container uk-navbar" uk-navbar>
+	<nav id="MainNav" class="uk-navbar-container uk-navbar" uk-navbar>
 		<div class="uk-navbar-left">
-			<ul class="uk-navbar-nav">
+			<ul class="uk-navbar-nav uk-visible@m">
 				<li>
 					<nuxt-link to="/">
 						Inicio
@@ -32,9 +32,7 @@
 					<nuxt-link :to="{ path: '/cards/' + card.id }">
 						{{ card.attributes.title }}
 					</nuxt-link>
-				</li> -->
-
-				
+				</li> -->	
 			</ul>
 		</div>
 
@@ -45,8 +43,8 @@
 		</div>
 
 		<div class="uk-navbar-right">
-
-			<ul class="uk-navbar-nav">
+			<button class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon uk-toggle="target: #offcanvas-nav-primary"></button>
+			<ul class="uk-navbar-nav uk-visible@m">
 				<li>
 					<nuxt-link to="/play">
 						Jugar

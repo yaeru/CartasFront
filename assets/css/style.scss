@@ -2,11 +2,12 @@
 
 // Background:
 
-$global-background:                              #CFD8DC;
+$global-background:                              #b7b1ad;
 
 $global-muted-background:                        #f8f8f8 !default;
-$global-primary-background:                      #1e87f0 !default;
+$global-primary-background:                      #D32F2F !default;
 $global-secondary-background:                    #222 !default;
+$global-beige-background:						 #e6dfdb;
 
 $global-success-background:                      #32d296 !default;
 $global-warning-background:                      #faa05a !default;
@@ -27,18 +28,23 @@ $global-radius-l:                     			 round($global-radius * 2);
 $border-rounded-border-radius:                   $global-radius-m;
 
 // Card
-$card-default-background:						 #fff;
+$card-default-background:						 $global-beige-background;
 
 // Progress
-$progress-background:                            $global-background;
-$progress-bar-background:                        $global-primary-background;
+$progress-background:                            #d3baba;
+//$progress-background:                            linear-gradient(90deg, rgba(158,153,136,1) 0%, rgba(215,207,183,1) 100%);
+//$progress-bar-background:                        linear-gradient(90deg, rgba(205,163,32,1) 0%, rgba(255,222,111,1) 100%);
+
+// Modal
+$modal-dialog-background:                        $global-beige-background;
+$modal-dialog-width:                             800px !default;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 
 // 2. Import default variables and available mixins.
 @import "../../node_modules/uikit/src/scss/variables-theme.scss";
-@import "../../node_modules/uikit/src/scss/mixins-theme.scss";
+//@import "../../node_modules/uikit/src/scss/mixins-theme.scss";
 
 // 3. Your custom mixin overwrites.
 
@@ -47,7 +53,6 @@ $progress-bar-background:                        $global-primary-background;
 @import "../../node_modules/uikit/src/scss/uikit-theme.scss";
 
 // NUXT transition
-
 .page-enter-active,
 .page-leave-active {
 	transition: opacity 0.5s;
@@ -71,6 +76,29 @@ $progress-bar-background:                        $global-primary-background;
 	}
 }
 
+// Navbar
+#MainNav {
+	box-shadow: 0 4px 10px rgba(0,0,0,0.30);
+	z-index: 1;
+}
+
+// Buttons
+.uk-button {
+	border-radius: $global-radius-xs;
+}
+
+// Modal
+.uk-modal {
+	backdrop-filter: blur(5px);
+}
+.uk-modal-dialog {
+	border-radius: $global-radius-s;
+	box-shadow: inset 0 0 0 10px #fff7f3, 0 6px 15px rgba(0,0,0,0.15);
+	@media (min-width: $breakpoint-medium) {
+		border-radius: $global-radius-m;
+	}
+}
+
 // Cards
 .uk-card {
 	&.uk-card-default {
@@ -82,6 +110,14 @@ $progress-bar-background:                        $global-primary-background;
 }
 .card-character {
 	position: relative;
+	box-shadow: inset 0 0 0 10px #fff7f3, 0 6px 15px rgba(0,0,0,0.15);
+	transform: translateY(0px);
+	user-select: none;
+	&:hover {
+		box-shadow: inset 0 0 0 10px #fff7f3, 0 7px 25px rgba(0,0,0,0.25);
+		transform: translateY(-7px);
+		transition: ease 0.5s;
+	}
 	.card-power {
 		position: absolute;
 		top: 10px;
@@ -108,19 +144,79 @@ $progress-bar-background:                        $global-primary-background;
 
 // Play
 #PlayStage {
-	height: calc(100vh - 185px);
+	height: calc(100vh - 150px);
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
+	@media (min-width: $breakpoint-medium) {
+		height: calc(100vh - 175px);
+	}
 }
 #PlayBar {
-	height: 105px;
-	background-color: #fff;
 	padding: $global-small-gutter;
+	height: 70px;
+	background-color: $card-default-background;
 	box-shadow: 0 -5px 10px rgba(0,0,0,0.15);
+	@media (min-width: $breakpoint-medium) {
+		height: 95px;
+	}
 
 	.uk-progress {
-		height: 40px;
+		height: 30px;
+		border: solid #fff 3px;
+		box-shadow: 0 4px 10px rgba(0,0,0,0.30);
+		transform: skewX(40deg);
+		@media (min-width: $breakpoint-medium) {
+			height: 50px;
+		}
 	}
-	#PlayerA {}
-	#PlayerB {}
+	.uk-progress::-webkit-progress-value {
+		//background: $progress-bar-background;
+	}
+	.player {
+		margin-top: -30px;
+		@media (min-width: $breakpoint-medium) {
+			margin-top: -50px;
+		}
+		.life-counter {
+			padding: $global-small-gutter;
+			width: 70px;
+			height: 70px;
+			border-radius: $global-radius-l;
+			background-color: $global-primary-background;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			z-index: 1;
+			border: solid #fff 5px;
+			//box-shadow: inset 0 0 20px rgba(0,0,0,0.20), inset 0 0 0 1px rgba(0,0,0,1), 0 0 0 1px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,0.15);
+			box-shadow: 0 4px 10px rgba(0,0,0,0.30);
+			@media (max-width: $breakpoint-medium) {
+				display: none;
+			}
+			* {
+				color: #fff;
+			}
+		}
+	}
+	#PlayerA {
+		.uk-progress {
+			margin-left: -23px;
+		}
+	}
+	#PlayerB {
+		.uk-progress {
+			margin-right: -23px;
+			transform: rotate(180deg) skewX(-40deg);
+		}
+	}
+}
+
+// Deck
+#Deck {
+	main {
+		height: calc(100vh - 80px);
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+	}
 }

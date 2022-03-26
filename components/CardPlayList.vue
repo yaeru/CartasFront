@@ -1,5 +1,5 @@
 <template>
-	<div class="uk-grid uk-child-width-1-3 uk-child-width-1-4@m uk-child-width-1-5@xl" uk-grid uk-height-match="target: .uk-card-description">
+	<div class="uk-grid uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@xl" uk-grid uk-height-match="target: .uk-card-description">
 		<div v-for="card in listCards" v-bind:key="card.attributes.id">
 			<article class="card-character uk-card uk-card-default uk-card-small uk-card-body uk-text-center" v-bind:class="card.attributes.culture">
 				<div class="card-power">

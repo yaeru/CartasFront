@@ -1,39 +1,41 @@
 <template>
-	<section id="PlayStage" class="uk-section uk-section-small">
+	<section v-if="!loading" id="PlayStage" class="uk-section uk-section-small">
 		<div class="uk-container uk-container-expand">
 			<CardPlayList :cards="cards || []" v-on:playCard="compare($event,cards.data)"
 			></CardPlayList>
 
 			<div id="modal-resultado" uk-modal>
-				<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-					
-					<div class="uk-grid uk-child-width-1-2@m uk-grid-small uk-margin-bottom uk-text-center" uk-grid v-if="contrincante">
+				<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
+					<h3 class="uk-modal-title">
+						Round NUMERO
+					</h3>
+					<div class="uk-grid uk-child-width-1-2@m uk-grid-small uk-margin-bottom" uk-grid v-if="contrincante">
 						<div>
-							<div class="uk-card uk-card-secondary uk-card-body uk-card-small">
-								<h4 class="uk-margin-remove">Enemigo</h4>
-								<h2 class="uk-margin-remove">{{contrincante.attributes.title}}</h2>
-								<h1 class="uk-margin-remove">Valor: {{contrincante.id}}</h1>
-							</div>
-						</div>
-						<div>
-							<div class="uk-card uk-card-primary uk-card-body uk-card-small">
-								<h4 class="uk-margin-remove">Tu Carta</h4>
+							<div class="uk-card">
+								<h4 class="uk-margin-remove">Jugador A</h4>
+								<img class="uk-border-circle uk-align-center uk-margin-remove-bottom" width="150" :src="api_url + participante.attributes.cover.data.attributes.url" />
 								<h2 class="uk-margin-remove">{{participante.attributes.title}}</h2>
-								<h1 class="uk-margin-remove">Valor {{participante.id}}</h1>
+								<h3 class="uk-margin-remove">Poder {{participante.id}}</h3>
 							</div>
 						</div>
+						
+						<div>
+							<div class="uk-card">
+								<h4 class="uk-margin-remove">Jugador B</h4>
+								<img class="uk-border-circle uk-align-center uk-margin-remove-bottom" width="150" :src="api_url + contrincante.attributes.cover.data.attributes.url" />
+								<h2 class="uk-margin-remove">{{contrincante.attributes.title}}</h2>
+								<h3 class="uk-margin-remove">Poder: {{contrincante.id}}</h3>
+							</div>
+						</div>
+						
 						<div class="uk-width-1-1">
-							<div class="uk-card uk-background-success uk-card-body uk-card-small" v-if="resultado === true">
-								<h3 class="uk-margin-remove">Ganaste</h3>
-							</div>
-							<div class="uk-card uk-background-danger uk-card-body uk-card-small" v-if="resultado === false">
-								<h3 class="uk-margin-remove">Perdiste</h3>
-							</div>
+							<h3 class="uk-h1 uk-margin-remove uk-text-success" v-if="resultado === true">¡Victoria!</h3>
+							<h3 class="uk-h1 uk-margin-remove uk-text-danger" v-if="resultado === false">Derrota</h3>
 						</div>
 					</div>
 
-					<button class="uk-button uk-button-primary uk-width-1-1 uk-modal-close" type="button">
-						Volver a jugar
+					<button class="uk-button uk-button-primary uk-button-large uk-modal-close uk-margin-medium-top" type="button">
+						Siguiente Round
 					</button>
 				</div>
 			</div>
@@ -52,12 +54,14 @@
 			return {
 				api_url: "http://localhost:1337",
 				cards: [],
+				loading: 0,
 				resultado: null,
 				participante: '',
 				contrincante: '',
 			}
 		},
 		apollo: {
+			$loadingKey: 'loading',
 			cards: {
 				prefetch: true,
 				query: cardsQuery,

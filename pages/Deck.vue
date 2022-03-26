@@ -1,5 +1,5 @@
 <template>
-	<section v-if="!loading" class="uk-grid" uk-grid>
+	<section v-if="!loading" id="Deck" class="uk-grid uk-grid-collapse" uk-grid>
 		<main class="uk-width-2-3@m">
 			<section class="uk-section">
 				<div class="uk-container">
