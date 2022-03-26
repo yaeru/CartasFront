@@ -21,34 +21,11 @@ For detailed explanation on how things work, check out the [documentation](https
 
 # Instrucciones
 
-Al comenzar el usuario solo tiene 5 cartas.
-Por cada batalla ganada, obtiene una carta de premio.
-Por cada batalla perdida, no hay penalizacion.
-El usuario batalla hasta obtener todas las cartas disponibles en la temporada, de un total de 30 cartas.
+## Cartas
 
-## Colecciones
+Cada Carta representa a un dios o personaje mitologico.
 
-Cada jugador puede coleccionar cartas para luego armar sus mazos y leer informacion sobre el dios y la cultura de la misma.
-Las colecciones pueden ampliarse por temporadas y eventos especiales.
-
-## Mazos
-
-Cada mazo esta compuesto de hasta 10 cartas, seleccionadas de las disponibles en la coleccion del jugador.
-Si el jugador tiene 15 cartas, debe armar un mazo con solo 10 y dejar las 5 restantes sin utilizarce en las batallas.
-Se pueden crear hasta 3 mazos con diferentes configuraciones de cartas para conseguir diversos efectos.
-
-Cada mazo debe incluir:
-
-- Un nombre.
-- Una descripcion opcional.
-- 10 cartas seleccionadas.
-- Una url unica.
-
-## Carta
-
-Cada carta representa a un Dios o personaje mitologico.
-
-Cada carta debe incluir:
+Cada Carta debe incluir:
 
 - Un nombre
 - Una descripcion breve
@@ -56,33 +33,58 @@ Cada carta debe incluir:
 - Una imagen
 - Una cultura
 - Un nivel de Poder
+- Temporada a la que pertenece
 
-## Batalla
+## Colecciones
 
-Cada batalla se da entre dos participantes: el usuario es jugador A y la PC el jugador B.
-Ambos jugadores comienzan con 100 de vida, pierde la batalla el primer jugador que se quede sin vida.
-
-Cada batalla puede tener varios rounds. En cada round el jugador A escoge una carta de su mazo, el jugador B hara lo mismo, ambas se comparan y la que tenga el nivel de fuerza mas alto, gana el round.
-El jugador que pierda el round se penaliza con -10 puntos de vida.
-
-Terminado el round, se muestran los resultados y comienza un siguiente round, asi hasta que uno de los jugadores quede en 0 vida y pierda la batalla.
-
-Una vez finalizada la batalla, si el jugador A gana, obtiene de recompenza una carta nueva en su coleccion.
-
+Cada Jugador puede coleccionar Cartas para luego armar sus mazos y leer informacion sobre el dios y la cultura de la misma.
+Las Colecciones pueden ampliarse por Temporadas y Eventos especiales.
 
 ## Temporadas
 
-Las temporadas son un periodo de x tiempo en la que x cultura esta promocionada. Una vez comenzada la nueva temporada, se agrega un nuevo set de cartas para hacer interesante el juego.
+Las Temporadas son un periodo de x tiempo en la que x cultura esta promocionada. Una vez comenzada la nueva temporada, se agrega un nuevo set de Cartas para hacer interesante el juego.
 
-### Ejemplo:
+Ejemplo:
 
-Temporada 1 arranca con 30 cartas: 10 griegas, 10 nordicas y 10 egipcias.
-El usuario batalla hasta obtener las 30 cartas.
-Comienza la temporada 2 "Culturas Latinas" y en el juego se añaden 30 cartas nuevas: 10 maya, 10 cartas araucania, 10 cartas inca.
-Ahora el usuario que ya tenia 30 en su coleccion, puede coleccionar 30 mas. El usuario que inicia por primera vez el juego, tiene 60 cartas para coleccionar.
+Temporada 1 arranca con 30 Cartas: 10 griegas, 10 nordicas y 10 egipcias.
+El usuario Batalla hasta obtener las 30 Cartas.
+Comienza la temporada 2 "Culturas Latinas" y en el juego se añaden 30 Cartas nuevas: 10 maya, 10 Cartas araucania, 10 Cartas inca.
+Ahora el usuario que ya tenia 30 en su coleccion, puede coleccionar 30 mas. El usuario que inicia por primera vez el juego, tiene 60 Cartas para coleccionar.
 
-### Deck builder
-### Info sobre cartas
+## Mazos
+
+El Jugador puede tener varios Mazos, cada Mazo esta compuesto de hasta 10 Cartas, seleccionadas de las disponibles en la coleccion del Jugador.
+Si el Jugador tiene 15 Cartas, debe armar un Mazo con solo 10 y dejar las 5 restantes sin poder utilizarce en las batallas.
+Se pueden crear hasta 3 Mazos con diferentes configuraciones de Cartas para conseguir diversos efectos.
+
+Cada Mazo debe incluir:
+
+- Un nombre.
+- Una descripcion opcional.
+- 10 Cartas seleccionadas.
+- Una url unica.
+
+# Cómo Jugar
+
+## Jugadores
+
+En el juego exiten dos participantes: el usuario es Jugador A y la PC el Jugador B.
+
+## Batalla
+
+Las Batallas se dan entre el Jugador A y el Jugador B.
+
+Ambos Jugadores comienzan con 100 de Vida, pierde la Batalla el primer Jugador que se quede sin Vida.
+
+Al iniciar la Batalla, en caso de que el Jugador A tenga mas de un Mazo, este debe seleccionar con cual quiere participar.
+
+Cada Batalla puede tener varios rounds. En cada Round el Jugador A escoge una Carta de su mazo, el Jugador B hara lo mismo, ambas se comparan y la que tenga el nivel de Poder mas alto, gana el Round.
+El Jugador que pierda el Round se penaliza con -10 puntos de Vida.
+
+Terminado el Round, se muestran los resultados y comienza un siguiente Round, asi hasta que uno de los Jugadores quede en 0 Vida y pierda la Batalla.
+
+Una vez finalizada la Batalla, si el Jugador A gana, obtiene de recompenza una Carta nueva en su Coleccion.
+
 
 ## Special Directories
 
