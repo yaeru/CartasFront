@@ -1,39 +1,42 @@
 <template>
 	<section class="uk-section">
-		<div class="uk-container">
-			<div>
-				<div class="uk-grid uk-child-width-1-2@m uk-grid-small uk-margin-bottom uk-text-center" uk-grid v-if="contrincante">
-					<div>
-						<div class="uk-card uk-card-primary uk-card-body">
-							<h4 class="uk-margin-remove">Tu Carta</h4>
-							<h2 class="uk-margin-remove">{{participante.attributes.title}}</h2>
-							<h1 class="uk-margin-remove">Valor {{participante.id}}</h1>
+		<div class="uk-container uk-container-xlarge">
+			<CardSlide :cards="cards || []" v-on:playCard="compare($event,cards.data)"
+			></CardSlide>
+
+			<div id="modal-resultado" uk-modal>
+				<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+					
+					<div class="uk-grid uk-child-width-1-2@m uk-grid-small uk-margin-bottom uk-text-center" uk-grid v-if="contrincante">
+						<div>
+							<div class="uk-card uk-card-secondary uk-card-body uk-card-small">
+								<h4 class="uk-margin-remove">Enemigo</h4>
+								<h2 class="uk-margin-remove">{{contrincante.attributes.title}}</h2>
+								<h1 class="uk-margin-remove">Valor: {{contrincante.id}}</h1>
+							</div>
+						</div>
+						<div>
+							<div class="uk-card uk-card-primary uk-card-body uk-card-small">
+								<h4 class="uk-margin-remove">Tu Carta</h4>
+								<h2 class="uk-margin-remove">{{participante.attributes.title}}</h2>
+								<h1 class="uk-margin-remove">Valor {{participante.id}}</h1>
+							</div>
+						</div>
+						<div class="uk-width-1-1">
+							<div class="uk-card uk-background-success uk-card-body uk-card-small" v-if="resultado === true">
+								<h3 class="uk-margin-remove">Ganaste</h3>
+							</div>
+							<div class="uk-card uk-background-danger uk-card-body uk-card-small" v-if="resultado === false">
+								<h3 class="uk-margin-remove">Perdiste</h3>
+							</div>
 						</div>
 					</div>
-					<div>
-						<div class="uk-card uk-card-secondary uk-card-body">
-							<h4 class="uk-margin-remove">Enemigo</h4>
-							<h2 class="uk-margin-remove">{{contrincante.attributes.title}}</h2>
-							<h1 class="uk-margin-remove">Valor: {{contrincante.id}}</h1>
-						</div>
-					</div>
-					<div class="uk-width-1-1">
-						<div class="uk-card uk-background-success uk-card-body uk-card-small" v-if="resultado === true">
-							<h3 class="uk-margin-remove">Ganaste</h3>
-						</div>
-						<div class="uk-card uk-background-danger uk-card-body uk-card-small" v-if="resultado === false">
-							<h3 class="uk-margin-remove">Perdiste</h3>
-						</div>
-					</div>
+
+					<button class="uk-button uk-button-primary uk-width-1-1 uk-modal-close" type="button">
+						Volver a jugar
+					</button>
 				</div>
-				<p v-else>
-					Escoje una carta para jugar
-					<br>
-					Vamos!
-				</p>
 			</div>
-			<CardList :cards="cards || []" v-on:playCard="compare($event,cards.data)"
-			></CardList>
 		</div>
 	</section>
 </template>

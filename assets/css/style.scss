@@ -1,13 +1,16 @@
 // 1. Your custom variables and variable overwrites.
 
 // Background:
+//$global-primary-background:					 #FFBC10;
+//$global-secondary-background:					 #EE8910;
+//$global-muted-background:                      #989898;
+$global-background:                              #CFD8DC;
 
 // Used in grid, column, container, align, card, padding
 $global-gutter:                                  30px !default;
 $global-small-gutter:                            15px !default;
 $global-medium-gutter:                           40px !default;
 $global-large-gutter:                            70px !default;
-
 
 // Radius
 $global-radius:                     			 30px;
@@ -17,7 +20,8 @@ $global-radius-m:                     			 round($global-radius / 1.7);
 $global-radius-l:                     			 round($global-radius * 2);
 $border-rounded-border-radius:                   $global-radius-m;
 
-
+// Card
+$card-default-background:						 #fff;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
@@ -43,6 +47,7 @@ $border-rounded-border-radius:                   $global-radius-m;
 	opacity: 0;
 }
 
+// Backgrounds
 .uk-background-success {
 	background-color: #32d296;
 	* {
@@ -53,5 +58,15 @@ $border-rounded-border-radius:                   $global-radius-m;
 	background-color: #f0506e;
 	* {
 		color: #fff;
+	}
+}
+
+// Cards
+.uk-card {
+	&.uk-card-default {
+		border-radius: $global-radius-s;
+		@media (min-width: $breakpoint-medium) {
+			border-radius: $global-radius-m;
+		}
 	}
 }

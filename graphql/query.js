@@ -14,6 +14,7 @@ query culturesQuery {
             attributes {
               title
               shortDescription
+              power
               culture {
                 data {
                   id
@@ -55,6 +56,7 @@ query cultureQuery($id: ID!) {
             attributes {
               title
               shortDescription
+              power
               culture {
                 data {
                   id
@@ -92,6 +94,7 @@ query cardsQuery {
         title
         shortDescription
         description
+        power
         culture {
           data {
             id
@@ -126,6 +129,7 @@ query cardQuery($id: ID!) {
         title
         shortDescription
         description
+        power
         culture {
           data {
             id
