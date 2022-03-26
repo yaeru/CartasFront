@@ -1,10 +1,16 @@
 // 1. Your custom variables and variable overwrites.
 
 // Background:
-//$global-primary-background:					 #FFBC10;
-//$global-secondary-background:					 #EE8910;
-//$global-muted-background:                      #989898;
+
 $global-background:                              #CFD8DC;
+
+$global-muted-background:                        #f8f8f8 !default;
+$global-primary-background:                      #1e87f0 !default;
+$global-secondary-background:                    #222 !default;
+
+$global-success-background:                      #32d296 !default;
+$global-warning-background:                      #faa05a !default;
+$global-danger-background:                       #f0506e !default;
 
 // Used in grid, column, container, align, card, padding
 $global-gutter:                                  30px !default;
@@ -22,6 +28,10 @@ $border-rounded-border-radius:                   $global-radius-m;
 
 // Card
 $card-default-background:						 #fff;
+
+// Progress
+$progress-background:                            $global-background;
+$progress-bar-background:                        $global-primary-background;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
@@ -49,13 +59,13 @@ $card-default-background:						 #fff;
 
 // Backgrounds
 .uk-background-success {
-	background-color: #32d296;
+	background-color: $global-success-background;
 	* {
 		color: #fff;
 	}
 }
 .uk-background-danger {
-	background-color: #f0506e;
+	background-color: $global-danger-background;
 	* {
 		color: #fff;
 	}
@@ -69,4 +79,48 @@ $card-default-background:						 #fff;
 			border-radius: $global-radius-m;
 		}
 	}
+}
+.card-character {
+	position: relative;
+	.card-power {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		left: unset;
+		text-align: right;
+		background: #dbb11d;
+		border-radius: 100%;
+		width: 40px;
+		height: 40px;
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.card-art {
+		background-color: $global-secondary-background;
+		border-radius: $global-radius-s;
+		@media (min-width: $breakpoint-medium) {
+			border-radius: $global-radius-s;
+		}
+	}
+}
+
+// Play
+#PlayStage {
+	height: calc(100vh - 185px);
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+}
+#PlayBar {
+	height: 105px;
+	background-color: #fff;
+	padding: $global-small-gutter;
+	box-shadow: 0 -5px 10px rgba(0,0,0,0.15);
+
+	.uk-progress {
+		height: 40px;
+	}
+	#PlayerA {}
+	#PlayerB {}
 }

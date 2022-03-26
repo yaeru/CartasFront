@@ -1,7 +1,7 @@
 <template>
 	<div class="uk-grid uk-child-width-1-3 uk-child-width-1-4@m" uk-grid uk-height-match="target: .uk-card-description">
 		<!-- <article v-for="card in cards.data" v-bind:key="card.attributes.id"> -->
-			<article v-for="card in listCards" v-bind:key="card.attributes.id">
+			<div v-for="card in listCards" v-bind:key="card.attributes.id">
 				<div class="uk-card uk-card-default uk-card-small" v-bind:class="card.attributes.culture" >
 					<div class="uk-card-body uk-text-center">
 						<img  class="uk-border-circle uk-align-center uk-margin-remove-bottom" width="150" :src="api_url + card.attributes.cover.data.attributes.url" :alt="card.attributes.title" />
@@ -60,7 +60,7 @@
 					</div>
 				</div>
 			</div>
-		</article>
+		</div>
 	</div>
 </template>
 

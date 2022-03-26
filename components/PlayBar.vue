@@ -1,51 +1,32 @@
 <template>
-	<nav class="uk-navbar-container uk-position-bottom uk-position-fixed" uk-navbar>
-		<div class="uk-navbar-left">
-			<ul class="uk-navbar-nav">
-				<li>
-					<nuxt-link to="/">
-						Inicio
-					</nuxt-link>
-				</li>
-				<li>
-					<nuxt-link to="/academy">
-						Academia
-					</nuxt-link>
-				</li>
-				
-			</ul>
-		</div>
-
-		<div class="uk-navbar-center">
-			<nuxt-link to="/" class="uk-navbar-item uk-logo">
-				VS
-			</nuxt-link>
-		</div>
-
-		<div class="uk-navbar-right">
-
-			<ul class="uk-navbar-nav">
-				<li>
-					<nuxt-link to="/play">
-						Jugar
-					</nuxt-link>
-				</li>
-				<li>
-					<nuxt-link to="/">
-						Coleccion
-					</nuxt-link>
-				</li>
-				<li>
-					<nuxt-link to="/deck">
-						Mazos
-					</nuxt-link>
-				</li>
-				<li>
-					<nuxt-link to="/">
-						Perfil
-					</nuxt-link>
-				</li>
-			</ul>
+	<nav id="PlayBar" class="uk-position-bottom uk-position-fixed">
+		<div class="uk-grid uk-child-width-expand uk-flex-between uk-flex-middle" uk-grid>
+			<div id="PlayerA">
+				<p class="uk-margin-remove">{{player.playerAname}}</p>
+				<progress class="uk-progress uk-margin-small-top" :value="player.playerAlife" max="100"></progress>
+			</div>
+			<div class="uk-text-center uk-width-small">
+				<p class="uk-margin-remove uk-h3">VS</p>
+			</div>
+			<div id="PlayerB" class="uk-text-right" dir="rtl">
+				<p class="uk-margin-remove">{{player.playerBname}}</p>
+				<progress class="uk-progress uk-margin-small-top" :value="player.playerBlife" max="100"></progress>
+			</div>
 		</div>
 	</nav>
 </template>
+
+<script>
+	export default {
+		data() {
+			return {
+				player: {
+					playerAname: 'Jugador A',
+					playerAlife: 85,
+					playerBname: 'Jugador B',
+					playerBlife: 37,
+				},
+			}
+		},
+	}
+</script>

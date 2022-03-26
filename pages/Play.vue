@@ -1,6 +1,6 @@
 <template>
-	<section class="uk-section uk-section-large">
-		<div class="uk-container uk-container-xlarge uk-panel-scrollable uk-height-large">
+	<section id="PlayStage" class="uk-section uk-section-small">
+		<div class="uk-container uk-container-expand">
 			<CardPlayList :cards="cards || []" v-on:playCard="compare($event,cards.data)"
 			></CardPlayList>
 
