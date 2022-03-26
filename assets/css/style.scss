@@ -2,12 +2,12 @@
 
 // Background:
 
-$global-background:                              #b7b1ad;
+$global-background:                              #e6dfdb;
 
 $global-muted-background:                        #f8f8f8 !default;
 $global-primary-background:                      #D32F2F !default;
 $global-secondary-background:                    #222 !default;
-$global-beige-background:						 #e6dfdb;
+$global-beige-background:						 $global-background;
 
 $global-success-background:                      #32d296 !default;
 $global-warning-background:                      #faa05a !default;
@@ -111,13 +111,7 @@ $modal-dialog-width:                             800px !default;
 .card-character {
 	position: relative;
 	box-shadow: inset 0 0 0 10px #fff7f3, 0 6px 15px rgba(0,0,0,0.15);
-	transform: translateY(0px);
 	user-select: none;
-	&:hover {
-		box-shadow: inset 0 0 0 10px #fff7f3, 0 7px 25px rgba(0,0,0,0.25);
-		transform: translateY(-7px);
-		transition: ease 0.5s;
-	}
 	.card-power {
 		position: absolute;
 		top: 10px;
@@ -143,12 +137,24 @@ $modal-dialog-width:                             800px !default;
 }
 
 // Play
+.uk-background-dark {
+	background-color: #b7b1ad;
+}
 #PlayStage {
 	height: calc(100vh - 150px);
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	@media (min-width: $breakpoint-medium) {
 		height: calc(100vh - 175px);
+	}
+	.card-character {
+		box-shadow: inset 0 0 0 10px #fff7f3, 0 6px 15px rgba(0,0,0,0.15);
+		transform: translateY(0px);
+		transition: ease 0.5s;
+		&:hover {
+			box-shadow: inset 0 0 0 10px #fff7f3, 0 7px 25px rgba(0,0,0,0.25);
+			transform: translateY(-7px);
+		}
 	}
 }
 #PlayBar {
@@ -218,5 +224,12 @@ $modal-dialog-width:                             800px !default;
 		height: calc(100vh - 80px);
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
+	}
+}
+
+// Academy
+#CharacterSingle {
+	.uk-section-muted {
+		background-color: #d1c9c5;
 	}
 }

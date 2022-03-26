@@ -12,13 +12,37 @@ export default {
       lang: 'es'
     },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+    { charset: 'utf-8' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    {
+      hid: 'og:title',
+      name: 'og:title',
+      content: 'Cartas CMS',
+    },
+    {
+      hid: 'description',
+      name: 'description',
+      content: 'Juego de cartas online sobre Mitología.',
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: 'Juego de cartas online sobre Mitología.',
+    },
+    {
+      hid: 'og:type',
+      property: 'og:type',
+      content: 'website',
+    },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content: 'https://entangle.fi/img/share.jpg',
+    },
+    { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' }
     ]
   },
 

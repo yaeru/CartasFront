@@ -1,5 +1,5 @@
 <template>
-	<section v-if="!loading" id="PlayStage" class="uk-section uk-section-small">
+	<section id="PlayStage" class="uk-section uk-section-small">
 		<div class="uk-container uk-container-expand">
 			<CardPlayList :cards="cards || []" v-on:playCard="compare($event,cards.data)"
 			></CardPlayList>
@@ -45,6 +45,7 @@
 
 <script>
 	import {cardsQuery} from '~/graphql/query'
+	var moment = require('moment')
 
 	export default {
 		name: 'Play',
@@ -55,6 +56,7 @@
 				api_url: "http://localhost:1337",
 				cards: [],
 				loading: 0,
+				moment: moment,
 				resultado: null,
 				participante: '',
 				contrincante: '',

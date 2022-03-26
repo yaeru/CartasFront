@@ -59,9 +59,6 @@
 			return {
 				api_url: "http://localhost:1337",
 				cards: [],
-				resultado: null,
-				participante: '',
-				contrincante: '',
 			}
 		},
 		apollo: {
