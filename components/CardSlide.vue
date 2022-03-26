@@ -5,7 +5,7 @@
 		<div class="uk-position-relative">
 
 			<div class="uk-slider-container">
-				<ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-4@m uk-child-width-1-5@xl uk-grid" uk-grid uk-height-match="target: .uk-card-description">
+				<ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-4@m uk-grid" uk-grid uk-height-match="target: .uk-card-description">
 					<li v-for="card in listCards" v-bind:key="card.attributes.id">
 						<div class="uk-card uk-card-default uk-card-small" v-bind:class="card.attributes.culture" >
 							<div class="uk-card-body uk-text-center">

@@ -1,5 +1,5 @@
 <template>
-	<div class="uk-grid uk-child-width-1-3 uk-child-width-1-4@m uk-child-width-1-5@l" uk-grid uk-height-match="target: .uk-card-description">
+	<div class="uk-grid uk-child-width-1-3 uk-child-width-1-4@m" uk-grid uk-height-match="target: .uk-card-description">
 		<!-- <article v-for="card in cards.data" v-bind:key="card.attributes.id"> -->
 			<article v-for="card in listCards" v-bind:key="card.attributes.id">
 				<div class="uk-card uk-card-default uk-card-small" v-bind:class="card.attributes.culture" >
@@ -9,7 +9,7 @@
 						<h3 class="uk-h2 uk-margin-remove">
 							{{card.attributes.title}}
 						</h3>
-						<p class="uk-text-muted uk-h4 uk-margin-remove">
+						<p class="uk-text-muted uk-margin-remove">
 							Cultura {{ card.attributes.culture.data.attributes.name }}
 						</p>
 
@@ -29,9 +29,6 @@
 					</div>
 
 					<div class="uk-card-footer"  uk-margin>
-						<button v-on:click="$emit('playCard',card.id)" class="uk-button uk-button-primary uk-width-1-1" uk-toggle="#modal-resultado">
-							Jugar Carta {{ card.id }}
-						</button>
 						<NuxtLink :to="{ path: '/cards/' + card.id }" class="uk-button uk-button-default uk-button-small uk-width-1-1">
 							Más info
 						</NuxtLink>

@@ -1,7 +1,7 @@
 <template>
 	<section v-if="!loading">
 		<header class="uk-section uk-section-muted">
-			<div class="uk-container">
+			<div class="uk-container uk-container-xlarge">
 				<h2 class="uk-margin-remove-bottom">
 					Cultura
 				</h2>
@@ -12,7 +12,7 @@
 		</header>
 
 		<section class="uk-section">
-			<div class="uk-container">
+			<div class="uk-container uk-container-xlarge">
 				<CardList :cards="culture.data.attributes.cards || []" ></CardList>
 			</div>
 		</section>
@@ -27,11 +27,6 @@
 
 	export default {
 		name: 'CultureIndex',
-		head() {
-			return {
-				//title: this.culture.data.attributes.name + " - " + this.siteTitle,
-			}
-		},
 		data() {
 			return {
 				siteTitle: "Cartas CMS pepe",
@@ -50,19 +45,6 @@
 					return { id: parseInt(this.$route.params.id) }
 				}
 			},
-		},
-		mounted: function() {
-			setTimeout(function(){
-				var card = culture.data.attributes.cards.find(card => card.id == 2)
-                var randomCard = this.culture.data.attributes.cards[Math.floor(Math.random()*this.culture.data.attributes.cards.length)]
-                console.log('es mas fuerte?', card.id > randomCard.id);
-			}, 3000);
-		},
-		methods:{
-            /* function que dado un id, compare la fuerza entre la card con ese id y una random */
-            compare(id){
-                
-            },
-        },
+		}
 	}
 </script>

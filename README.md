@@ -37,7 +37,7 @@ Cada Carta debe incluir:
 
 ## Colecciones
 
-Cada Jugador puede coleccionar Cartas para luego armar sus mazos y leer informacion sobre el dios y la cultura de la misma.
+Cada Jugador puede coleccionar Cartas para luego armar sus Mazos y leer informacion sobre el dios y la cultura de la misma.
 Las Colecciones pueden ampliarse por Temporadas y Eventos especiales.
 
 ## Temporadas
@@ -50,6 +50,14 @@ Temporada 1 arranca con 30 Cartas: 10 griegas, 10 nordicas y 10 egipcias.
 El usuario Batalla hasta obtener las 30 Cartas.
 Comienza la temporada 2 "Culturas Latinas" y en el juego se añaden 30 Cartas nuevas: 10 maya, 10 Cartas araucania, 10 Cartas inca.
 Ahora el usuario que ya tenia 30 en su coleccion, puede coleccionar 30 mas. El usuario que inicia por primera vez el juego, tiene 60 Cartas para coleccionar.
+
+Cada Temporada debe incluir:
+
+- Un nombre
+- Una descripcion
+- Una fecha de inicio
+- Una fecha de fin
+- Un listado de 30 cartas
 
 ## Mazos
 
@@ -72,18 +80,22 @@ En el juego exiten dos participantes: el usuario es Jugador A y la PC el Jugador
 
 ## Batalla
 
-Las Batallas se dan entre el Jugador A y el Jugador B.
-
-Ambos Jugadores comienzan con 100 de Vida, pierde la Batalla el primer Jugador que se quede sin Vida.
+Las Batallas son un conjunto de Rounds que se dan entre el Jugador A y el Jugador B, ambos Jugadores comienzan con 100 de Vida, pierde la Batalla el primer Jugador que se quede sin Vida.
 
 Al iniciar la Batalla, en caso de que el Jugador A tenga mas de un Mazo, este debe seleccionar con cual quiere participar.
 
-Cada Batalla puede tener varios rounds. En cada Round el Jugador A escoge una Carta de su mazo, el Jugador B hara lo mismo, ambas se comparan y la que tenga el nivel de Poder mas alto, gana el Round.
+Una vez finalizada la Batalla, si el Jugador A gana, obtiene de recompenza una Carta nueva en su Coleccion.
+
+## Rounds
+
+Cada Batalla puede tener varios Rounds. En cada Round el Jugador A escoge una Carta de su Mazo, el Jugador B hara lo mismo, ambas se comparan y la que tenga el nivel de Poder mas alto, gana el Round.
+
 El Jugador que pierda el Round se penaliza con -10 puntos de Vida.
 
 Terminado el Round, se muestran los resultados y comienza un siguiente Round, asi hasta que uno de los Jugadores quede en 0 Vida y pierda la Batalla.
 
-Una vez finalizada la Batalla, si el Jugador A gana, obtiene de recompenza una Carta nueva en su Coleccion.
+
+# Nuxt data
 
 
 ## Special Directories
