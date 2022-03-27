@@ -44,7 +44,7 @@ $modal-dialog-width:                             800px !default;
 
 // 2. Import default variables and available mixins.
 @import "../../node_modules/uikit/src/scss/variables-theme.scss";
-//@import "../../node_modules/uikit/src/scss/mixins-theme.scss";
+@import "../../node_modules/uikit/src/scss/mixins-theme.scss";
 
 // 3. Your custom mixin overwrites.
 
@@ -63,6 +63,9 @@ $modal-dialog-width:                             800px !default;
 }
 
 // Backgrounds
+.uk-section-dark-beige {
+	background-color: #d1c9c5;
+}
 .uk-background-success {
 	background-color: $global-success-background;
 	* {
@@ -229,7 +232,5 @@ $modal-dialog-width:                             800px !default;
 
 // Academy
 #CharacterSingle {
-	.uk-section-muted {
-		background-color: #d1c9c5;
-	}
+	
 }

@@ -8,6 +8,16 @@ query culturesQuery {
       id
       attributes {
         name
+        cover {
+          data {
+            id
+            attributes {
+              url
+              caption
+              alternativeText
+            }
+          }
+        }
         cards {
           data {
             id
@@ -50,6 +60,16 @@ query cultureQuery($id: ID!) {
       id
       attributes {
         name
+        cover {
+          data {
+            id
+            attributes {
+              url
+              caption
+              alternativeText
+            }
+          }
+        }
         cards {
           data {
             id

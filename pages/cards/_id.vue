@@ -1,13 +1,20 @@
 <template>
 	<section id="CharacterSingle" v-if="!loading">
-		<header class="uk-section uk-section-muted">
-			<div class="uk-container">
+		<header class="uk-section uk-section-dark-beige">
+			<div class="uk-container uk-container-large">
 				<div class="uk-grid" uk-grid >
 					<div class="uk-width-1-5@m">
 						<img :src="api_url + card.data.attributes.cover.data.attributes.url" :alt="card.data.attributes.cover.data.attributes.alternativeText" />
 					</div>
 
 					<div class="uk-width-4-5@m">
+						<ul class="uk-breadcrumb">
+							<li><nuxt-link to="/">Incio</nuxt-link></li>
+							<li><nuxt-link to="/academy">Academia</nuxt-link></li>
+							<li><nuxt-link :to="'/cultures/' + card.data.attributes.culture.data.id">{{ card.data.attributes.culture.data.attributes.name }}</nuxt-link></li>
+							<li><span>{{ card.data.attributes.title }}</span></li>
+						</ul>
+						
 						<h2 class="uk-margin-remove-bottom">
 							{{ card.data.attributes.culture.data.attributes.name }}
 						</h2>
@@ -23,16 +30,16 @@
 		</header>
 		
 		<section class="uk-section">
-			<div class="uk-container">
+			<div class="uk-container uk-container-large">
 				<h3 class="uk-h2">Historia</h3>
 				<div class="uk-column-1-2@m uk-dropcap" v-html="$md.render(card.data.attributes.description)"></div>
 			</div>
 		</section>
 
-		<section class="uk-section uk-section-muted">
-			<div class="uk-container">
+		<section class="uk-section uk-background-primary uk-preserve-color">
+			<div class="uk-container uk-container-small">
 				<div class="uk-grid uk-grid-large uk-flex-middle" uk-grid>
-					<div class="uk-width-1-3@m">
+					<div class="uk-width-2-5@m">
 						<article class="card-character uk-card uk-card-default uk-card-small uk-card-body uk-text-center">
 							<div class="card-power">
 								<h3 class="uk-margin-remove">{{card.data.attributes.power}}</h3>
@@ -54,7 +61,7 @@
 							</p>
 						</article>
 					</div>
-					<div class="uk-width-2-3@m">
+					<div class="uk-width-3-5@m uk-light">
 						<h3 class="uk-h2">Jugando con {{ card.data.attributes.title }}</h3>
 						<p class="uk-dropcap">
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -74,7 +81,7 @@
 		</section>
 
 		<section class="uk-section">
-			<div class="uk-container">
+			<div class="uk-container uk-container-large">
 				<h3 class="uk-h2 uk-text-center">
 					Otros Dioses de la cultura {{ card.data.attributes.culture.data.attributes.name }}
 				</h3>
