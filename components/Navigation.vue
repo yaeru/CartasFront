@@ -50,27 +50,28 @@
 						Jugar
 					</nuxt-link>
 				</li>
-				<li>
-					<nuxt-link to="/">
-						Coleccion
-					</nuxt-link>
-				</li>
-				<li>
-					<nuxt-link to="/decks">
-						Mazos
-					</nuxt-link>
-				</li>
 
 				<li v-if="$strapi.user === null">
-					<NuxtLink to="/login">Login</NuxtLink>
+					<NuxtLink to="/login">Iniciar Sesión</NuxtLink>
 				</li>
 				<li v-if="$strapi.user === null">
-					<NuxtLink to="/signup">Signup</NuxtLink>
+					<NuxtLink to="/signup">Registrate</NuxtLink>
 				</li>
 				<li v-if="$strapi.user !== null">
-					<span>{{ $strapi.user.username }}</span>
-					<NuxtLink to="/new">Create Post</NuxtLink>
-					<button @click="logout">Logout</button>
+					<nuxt-link to="/">
+						Mi Coleccion
+					</nuxt-link>
+				</li>
+				<li v-if="$strapi.user !== null">
+					<nuxt-link to="/decks">
+						Mis Mazos
+					</nuxt-link>
+				</li>
+				<li v-if="$strapi.user !== null">
+					<nuxt-link to="/profile">{{ $strapi.user.username }}</nuxt-link>
+				</li>
+				<li v-if="$strapi.user !== null">
+					<a @click="logout">Logout</a>
 				</li>
 			</ul>
 		</div>

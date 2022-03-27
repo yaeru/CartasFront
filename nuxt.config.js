@@ -65,13 +65,18 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/strapi'],
+  buildModules: [
+  '@nuxtjs/strapi'
+  ],
   strapi: {
     // Options
-    url: process.env.STRAPI_URL || 'http://localhost:1337',
+    url: process.env.STRAPI_URL || 'http://localhost:1337/api',
     entities: ['cards','decks'],
-    prefix: '/api',
+    //prefix: '/api',
     version: 'v4'
+  },
+  env: {
+    STRAPI_URL: `http://localhost:1337/api`,
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
