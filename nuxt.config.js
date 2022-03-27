@@ -69,7 +69,7 @@ export default {
   strapi: {
     // Options
     url: process.env.STRAPI_URL || 'http://localhost:1337',
-    entities: ['cards'],
+    entities: ['cards','decks'],
     prefix: '/api',
     version: 'v4'
   },
@@ -88,6 +88,8 @@ export default {
       }
     }
   },
+
+  middleware: ['auth'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

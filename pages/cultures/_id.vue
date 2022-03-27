@@ -31,7 +31,6 @@
 				<CardList :cards="culture.data.attributes.cards || []" ></CardList>
 			</div>
 		</section>
-
 	</section>
 </template>
 
@@ -44,7 +43,6 @@
 		name: 'CultureIndex',
 		data() {
 			return {
-				siteTitle: "Cartas CMS pepe",
 				api_url: "http://localhost:1337",
 				culture: [],
 				loading: 0,

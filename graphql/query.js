@@ -174,4 +174,60 @@ query cardQuery($id: ID!) {
 }
 `;
 
+// For the Decks Archive
+export const decksQuery = gql`
+query decksQuery {
+  decks {
+    data {
+      id
+      attributes {
+        name
+        description
+      }
+    }
+  }
+}
+`;
 
+// For the Deck page
+export const deckQuery = gql`
+query deckQuery($id: ID!) {
+  deck(id: $id) {
+    data {
+      id
+      attributes {
+        name
+        description
+        cards {
+          data {
+            id
+            attributes {
+              title
+              shortDescription
+              power
+              culture {
+                data {
+                  id
+                  attributes {
+                    name
+                  }
+                }
+              }
+              cover {
+                data {
+                  id
+                  attributes {
+                    url
+                    caption
+                    alternativeText
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;

@@ -56,14 +56,21 @@
 					</nuxt-link>
 				</li>
 				<li>
-					<nuxt-link to="/deck">
+					<nuxt-link to="/decks">
 						Mazos
 					</nuxt-link>
 				</li>
-				<li>
-					<nuxt-link to="/">
-						Perfil
-					</nuxt-link>
+
+				<li v-if="$strapi.user === null">
+					<NuxtLink to="/login">Login</NuxtLink>
+				</li>
+				<li v-if="$strapi.user === null">
+					<NuxtLink to="/signup">Signup</NuxtLink>
+				</li>
+				<li v-if="$strapi.user !== null">
+					<span>{{ $strapi.user.username }}</span>
+					<NuxtLink to="/new">Create Post</NuxtLink>
+					<button @click="logout">Logout</button>
 				</li>
 			</ul>
 		</div>
@@ -81,6 +88,12 @@
 				cultures: [],
 				cards: [],
 			}
+		},
+		methods: {
+			async logout() {
+				await this.$strapi.logout()
+				this.$nuxt.$router.push('/')
+			},
 		},
 
 		apollo: {
