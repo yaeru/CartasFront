@@ -231,3 +231,51 @@ query deckQuery($id: ID!) {
   }
 }
 `;
+
+
+// For the User page
+export const userQuery = gql`
+query userQuery($id: ID!){
+  usersPermissionsUser(id: $id) {
+    data {
+      id
+      attributes {
+        username
+        email
+        decks {
+          data {
+            id
+            attributes {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
+// For user Profile
+export const usersDeckQuery = gql`
+query usersDeckQuery{
+  usersPermissionsUsers {
+    data {
+      id
+      attributes {
+        username
+        email
+        decks {
+          data {
+            id
+            attributes {
+              name
+              description
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;

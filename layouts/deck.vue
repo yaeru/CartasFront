@@ -36,6 +36,7 @@
 		data() {
 			return {
 				api_url: "http://localhost:1337",
+				decks: [],
 			}
 		},
 		apollo: {

@@ -37,8 +37,6 @@
 <script>
 	import {cultureQuery} from '~/graphql/query';
 	
-	var moment = require('moment')
-
 	export default {
 		name: 'CultureIndex',
 		data() {
@@ -46,7 +44,6 @@
 				api_url: "http://localhost:1337",
 				culture: [],
 				loading: 0,
-				moment: moment,
 			}
 		},
 		apollo: {
