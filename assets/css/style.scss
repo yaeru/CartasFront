@@ -27,6 +27,11 @@ $global-radius-m:                     			 round($global-radius / 1.7);
 $global-radius-l:                     			 round($global-radius * 2);
 $border-rounded-border-radius:                   $global-radius-m;
 
+$global-font-family:                             'Alegreya Sans', sans-serif;
+$global-font-size:                               18px !default;
+$base-heading-font-family:                       Old Fenris,Times New Roman,serif;
+
+
 // Card
 $card-default-background:						 $global-beige-background;
 
@@ -39,7 +44,8 @@ $progress-background:                            #d3baba;
 $modal-dialog-background:                        $global-beige-background;
 $modal-dialog-width:                             800px !default;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap');
+@import url('//db.onlinewebfonts.com/c/ce7ee1905f939d4e0f4cfcb3470c4d4e?family=Old+Fenris');
 
 
 // 2. Import default variables and available mixins.
@@ -84,10 +90,47 @@ $modal-dialog-width:                             800px !default;
 	box-shadow: 0 4px 10px rgba(0,0,0,0.30);
 	z-index: 1;
 }
+.uk-logo {
+	font-family: $base-heading-font-family;
+	font-variant: small-caps;
+	font-size: 1.7rem;
+}
 
 // Buttons
 .uk-button {
 	border-radius: $global-radius-xs;
+	font-family: $base-heading-font-family;
+	&.uk-button-large {
+		font-size: 1.3rem;
+	}
+	&.uk-button-game {
+		background: linear-gradient(0deg, rgba(215,24,24,1) 0%, rgba(68,9,9,1) 100%);
+		background: linear-gradient(180deg, rgba(164,19,19,1) 0%, rgba(211,47,47,1) 52%, rgba(201,25,25,1) 54%, rgba(111,16,16,1) 100%);
+		border: solid 1px #000;
+		box-shadow:
+		inset 0 2px 2px rgba(#fff, 0.3),
+		inset -2px -2px 2px rgba(#000, 0.4),
+		inset 0 0 12px rgba(#000, 0.7),
+		0 0 0 3px #d3b445,
+		0 0 0 4px #000,
+		0 3px 7px rgba(#000, 0.1),
+		0 5px 10px rgba(#000, 0.2)
+		;
+		text-shadow: 0 2px 3px rgba(#000, 0.8);
+		border-radius: 2px;
+	}
+	&.uk-button-action {
+		background-color: blue;
+		background: linear-gradient(180deg, rgba(164,19,19,1) 0%, rgba(211,47,47,1) 52%, rgba(201,25,25,1) 54%, rgba(111,16,16,0.8) 100%);
+		border: solid 1px rgba(#000, 0.8);
+		box-shadow:
+		inset 1px 2px 2px rgba(#fff, 0.5),
+		inset -2px -2px 2px rgba(#000, 0.3),
+		inset 0 0 12px rgba(#000, 0.5),
+		0 3px 7px rgba(#000, 0.1),
+		;
+		text-shadow: 0 2px 3px rgba(#000, 0.8);
+	}
 }
 
 // Modal
@@ -113,15 +156,15 @@ $modal-dialog-width:                             800px !default;
 }
 .card-character {
 	position: relative;
-	box-shadow: inset 0 0 0 10px #fff7f3, 0 6px 15px rgba(0,0,0,0.15);
+	box-shadow: inset 0 0 0 10px #fff7f3, 0 4px 6px rgba(0,0,0, 0.2);
 	user-select: none;
+	border: solid 1px #767676;
 	.card-power {
 		position: absolute;
-		top: 10px;
-		right: 10px;
+		top: -5px;
+		right: -5px;
 		left: unset;
 		text-align: right;
-		background: #dbb11d;
 		border-radius: 100%;
 		width: 40px;
 		height: 40px;
@@ -129,9 +172,42 @@ $modal-dialog-width:                             800px !default;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		background: #0a102c;
+		background: radial-gradient(circle at 20px 15px, #3861f9, #0a102c);
+		box-shadow: inset 0 0 7px rgba(#000,0.5), 0 5px 6px rgba(#000,0.5);
+		border: solid 3px #dbb11d;
+		text-shadow: 0 2px 3px rgba(#000, 0.8);
+		* {
+			color: #fff;
+			font-size: 1.4rem;
+			letter-spacing: -1px;
+		}
+		&:before {
+			content: "";
+			position: absolute;
+			top: 3px;
+			left: 15px;
+			width: 40%;
+			height: 40%;
+			border-radius: 50%;
+			background: radial-gradient(circle at 50% 0px, #ffffff, rgba(255, 255, 255, 0) 58%);
+			filter: blur(2px);
+			z-index: 2;
+		}
 	}
 	.card-art {
 		background-color: $global-secondary-background;
+		//background-image: url('@/assets/img/zeus.webp');
+		background-size: cover;
+		border-radius: $global-radius-s;
+		@media (min-width: $breakpoint-medium) {
+			border-radius: $global-radius-s;
+		}
+		img {
+			//opacity: 0;
+		}
+	}
+	.uk-card-description {
 		border-radius: $global-radius-s;
 		@media (min-width: $breakpoint-medium) {
 			border-radius: $global-radius-s;
@@ -151,7 +227,7 @@ $modal-dialog-width:                             800px !default;
 		height: calc(100vh - 175px);
 	}
 	.card-character {
-		box-shadow: inset 0 0 0 10px #fff7f3, 0 6px 15px rgba(0,0,0,0.15);
+		box-shadow: inset 0 0 0 10px #fff7f3,  0 4px 6px rgba(0,0,0, 0.2);
 		transform: translateY(0px);
 		transition: ease 0.5s;
 		&:hover {
@@ -174,11 +250,16 @@ $modal-dialog-width:                             800px !default;
 		border: solid #fff 3px;
 		box-shadow: 0 4px 10px rgba(0,0,0,0.30);
 		transform: skewX(40deg);
+		border-radius: 0;
 		@media (min-width: $breakpoint-medium) {
 			height: 50px;
 		}
 	}
+	.uk-progress::-webkit-progress-bar {
+		border-radius: 0;
+	}
 	.uk-progress::-webkit-progress-value {
+		border-radius: 0;
 		//background: $progress-bar-background;
 	}
 	.player {
@@ -212,11 +293,17 @@ $modal-dialog-width:                             800px !default;
 		.uk-progress {
 			margin-left: -23px;
 		}
+		.player-name {
+			padding-left: 1.5rem;
+		}
 	}
 	#PlayerB {
 		.uk-progress {
 			margin-right: -23px;
 			transform: rotate(180deg) skewX(-40deg);
+		}
+		.player-name {
+			padding-right: 1.5rem;
 		}
 	}
 }

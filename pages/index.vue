@@ -4,7 +4,7 @@
 			<h1>
 				Bienvenidos
 			</h1>
-			<router-link to="/play" class="uk-button uk-button-primary uk-button-large">Vamos a jugar</router-link>
+			<router-link to="/play" class="uk-button uk-button-primary uk-button-large uk-button-game">Vamos a jugar</router-link>
 			<router-link to="academy" class="uk-button uk-button-secondary uk-button-large">Quiero aprender</router-link>
 		</div>
 	</section>

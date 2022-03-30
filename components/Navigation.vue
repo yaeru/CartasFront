@@ -38,7 +38,7 @@
 
 		<div class="uk-navbar-center">
 			<nuxt-link to="/" class="uk-navbar-item uk-logo">
-				Cartas
+				Cards of Mythology
 			</nuxt-link>
 		</div>
 

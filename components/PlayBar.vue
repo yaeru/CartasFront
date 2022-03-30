@@ -11,7 +11,7 @@
 				</div>
 				<div class="uk-width-expand">
 					<progress class="uk-progress uk-margin-small-bottom" :value="player.playerAlife" max="100"></progress>
-					<p class="uk-margin-remove uk-h4">{{player.playerAname}}</p>
+					<p class="uk-margin-remove uk-h4 player-name">{{player.playerAname}}</p>
 				</div>
 			</div>
 			<div class="uk-text-center uk-width-small uk-visible@m">
@@ -27,7 +27,7 @@
 				</div>
 				<div class="uk-width-expand">
 					<progress class="uk-progress uk-margin-small-bottom" :value="player.playerBlife" max="100" dir="ltr"></progress>
-					<p class="uk-margin-remove uk-h4">{{player.playerBname}}</p>
+					<p class="uk-margin-remove uk-h4 player-name">{{player.playerBname}}</p>
 				</div>
 			</div>
 		</div>

@@ -10,17 +10,22 @@
 					<img class="uk-border-circle uk-align-center uk-margin-remove-bottom" width="150" :src="api_url + card.attributes.cover.data.attributes.url" :alt="card.attributes.title" />
 				</figure>
 
-				<h3 class="uk-h2 uk-margin-remove">
+				
+				<div class="uk-card-description">
+					<h3 class="uk-h2 uk-margin-remove">
 					{{card.attributes.title}}
 				</h3>
-				<p class="uk-text-muted uk-h4 uk-margin-remove">
+				<p class="uk-text-muted uk-h4 uk-margin-remove uk-hidden">
 					Cultura {{ card.attributes.culture.data.attributes.name }}
-				</p>
-
-				<p class="uk-card-description uk-text-small uk-margin-small-top">
+				</p><!--  -->
+				<p class="uk-text-small uk-margin-small-top">
 					{{ card.attributes.shortDescription }}
-				</p>				
-				<button v-on:click="$emit('playCard',card.id)" class="uk-button uk-button-primary uk-width-1-1" uk-toggle="#modal-resultado">
+				</p>
+				<figure>
+					<img src="@/assets/img/greek.png" width="40">
+				</figure>
+				</div>
+				<button v-on:click="$emit('playCard',card.id)" class="uk-button uk-button-primary uk-button-action" uk-toggle="#modal-resultado">
 					Jugar Carta {{ card.id }}
 				</button>
 		</article>
