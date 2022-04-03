@@ -1,37 +1,31 @@
 <template>
-	<div class="uk-grid uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@xl" uk-grid uk-height-match="target: .uk-card-description">
-		<div v-for="card in listCards" v-bind:key="card.attributes.id">
-			<article class="card-character uk-card uk-card-default uk-card-small uk-card-body uk-text-center" v-bind:class="card.attributes.culture">
-				<div class="card-power">
-					<h3 class="uk-margin-remove">{{card.attributes.power}}</h3>
-				</div>
-				
-				<figure class="card-art uk-padding-small uk-margin-remove-top uk-margin-small-bottom">
-					<img class="uk-border-circle uk-align-center uk-margin-remove-bottom" width="150" :src="api_url + card.attributes.cover.data.attributes.url" :alt="card.attributes.title" />
-				</figure>
+	<div class="player-hand-grid">
+		<article class="card-character uk-card uk-card-default uk-card-small uk-card-body uk-text-center" v-for="card in listCards" v-bind:key="card.attributes.id" v-bind:class="card.attributes.culture">
+			<div class="card-power">
+				<h3 class="uk-margin-remove">{{card.attributes.power}}</h3>
+			</div>
 
-				
-				<div class="uk-card-description">
-					<h3 class="uk-h2 uk-margin-remove">
-					{{card.attributes.title}}
+			<figure class="card-art uk-padding-small uk-margin-remove-top uk-margin-small-bottom">
+				<img class="uk-border-circle uk-align-center uk-margin-remove-bottom" width="150" :src="api_url + card.attributes.cover.data.attributes.url" :alt="card.attributes.title" />
+			</figure>
+
+
+			<div class="card-info">
+				<h3 class="uk-h2 uk-margin-remove">
+					{{card.attributes.title}} <img src="@/assets/img/greek.png" width="30">
 				</h3>
 				<p class="uk-text-muted uk-h4 uk-margin-remove uk-hidden">
 					Cultura {{ card.attributes.culture.data.attributes.name }}
-				</p><!--  -->
-				<p class="uk-text-small uk-margin-small-top">
+				</p>
+				<p class="uk-margin-small-top card-description">
 					{{ card.attributes.shortDescription }}
 				</p>
-				<figure>
-					<img src="@/assets/img/greek.png" width="40">
-				</figure>
-				</div>
-				<button v-on:click="$emit('playCard',card.id)" class="uk-button uk-button-primary uk-button-action" uk-toggle="#modal-resultado">
-					Jugar Carta {{ card.id }}
-				</button>
+			</div>
+			<button v-on:click="$emit('playCard',card.id)" class="uk-button uk-button-primary uk-button-action" uk-toggle="#modal-resultado">
+				Jugar Carta {{ card.id }}
+			</button>
 		</article>
 	</div>
-</div>
-
 </template>
 
 <script>
