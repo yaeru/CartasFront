@@ -29,7 +29,7 @@ $border-rounded-border-radius:                   $global-radius-m;
 
 $global-font-family:                             'Alegreya Sans', sans-serif;
 $global-font-size:                               18px !default;
-$base-heading-font-family:                       Old Fenris,Times New Roman,serif;
+$base-heading-font-family:                       'Old Fenris',Times New Roman,serif;
 
 
 // Card
@@ -45,7 +45,7 @@ $modal-dialog-background:                        $global-beige-background;
 $modal-dialog-width:                             800px !default;
 
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap');
-@import url('//db.onlinewebfonts.com/c/ce7ee1905f939d4e0f4cfcb3470c4d4e?family=Old+Fenris');
+@import url('https://db.onlinewebfonts.com/c/ce7ee1905f939d4e0f4cfcb3470c4d4e?family=Old+Fenris');
 
 
 // 2. Import default variables and available mixins.
