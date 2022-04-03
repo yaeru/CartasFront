@@ -12,7 +12,7 @@
 					Usadas
 				</div>
 			</div>
-			<!-- <div class="player-right">
+			 <!-- <div class="player-right uk-hidden">
 				<div class="player-life-bar">
 					<span style="height: 45%;"></span>
 				</div>
@@ -56,7 +56,7 @@
 					Player A Name
 				</h2>
 			</div>
-			<!-- <div class="player-right">
+			<!-- <div class="player-right uk-hidden">
 				<div class="player-life-bar">
 					<span style="height: 85%;"></span>
 				</div>
