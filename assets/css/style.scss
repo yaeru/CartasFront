@@ -45,7 +45,17 @@ $modal-dialog-background:                        $global-beige-background;
 $modal-dialog-width:                             800px !default;
 
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap');
-@import url('https://db.onlinewebfonts.com/c/ce7ee1905f939d4e0f4cfcb3470c4d4e?family=Old+Fenris');
+//@import url('https://db.onlinewebfonts.com/c/ce7ee1905f939d4e0f4cfcb3470c4d4e?family=Old+Fenris');
+
+@font-face {
+	font-family: "Old Fenris";
+    src: url("//db.onlinewebfonts.com/t/ce7ee1905f939d4e0f4cfcb3470c4d4e.eot"); /* IE9*/
+    src: url("//db.onlinewebfonts.com/t/ce7ee1905f939d4e0f4cfcb3470c4d4e.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("//db.onlinewebfonts.com/t/ce7ee1905f939d4e0f4cfcb3470c4d4e.woff2") format("woff2"), /* chrome firefox */
+    url("//db.onlinewebfonts.com/t/ce7ee1905f939d4e0f4cfcb3470c4d4e.woff") format("woff"), /* chrome firefox */
+    url("//db.onlinewebfonts.com/t/ce7ee1905f939d4e0f4cfcb3470c4d4e.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
+    url("//db.onlinewebfonts.com/t/ce7ee1905f939d4e0f4cfcb3470c4d4e.svg#Old Fenris") format("svg"); /* iOS 4.1- */
+}
 
 
 // 2. Import default variables and available mixins.

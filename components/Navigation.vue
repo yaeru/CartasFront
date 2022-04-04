@@ -46,9 +46,9 @@
 			<button class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon uk-toggle="target: #offcanvas-nav-primary"></button>
 			<ul class="uk-navbar-nav uk-visible@m">
 				<li>
-					<nuxt-link to="/play">
+					<router-link to="/play">
 						Jugar
-					</nuxt-link>
+					</router-link>
 				</li>
 
 				<li v-if="$strapi.user === null">
