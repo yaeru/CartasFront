@@ -1,16 +1,13 @@
 export default {
-  /*router: {
-    base: '/CartasFront/'
-  },*/
-
-  target: 'static',
-  ssr: false,
   router: {
-    base: '/CartasFront/'
+    base: '/disruptionx/'
   },
-  generate: {
-    fallback: true
-  },
+
+  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
+  ssr: false,
+
+  // Target: https://go.nuxtjs.dev/config-target
+  target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
