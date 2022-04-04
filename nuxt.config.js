@@ -4,8 +4,12 @@ export default {
   },*/
 
   target: 'static',
+  ssr: false,
   router: {
-    base: '/<repository-name>/'
+    base: '/CartasFront/'
+  },
+  generate: {
+    fallback: true
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -45,7 +49,7 @@ export default {
     { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/favicon.png' }
+    { rel: 'icon', type: 'image/png', href: '/favicon.png' }
     ]
   },
 
@@ -55,12 +59,12 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@assets/css/style.scss'
+  '@assets/css/style.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@plugins/uikit.js',
+  '@plugins/uikit.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -83,8 +87,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/apollo',
-    '@nuxtjs/markdownit',
+  '@nuxtjs/apollo',
+  '@nuxtjs/markdownit',
   ],
 
   apollo: {
