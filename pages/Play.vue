@@ -2,7 +2,7 @@
 	<section id="PlayStage">
 
 		<section class="player-area player-top">
-			<div class="player-left-cards">
+			<div class="player-side-cards">
 				<div class="player-deck uk-card uk-card-primary">
 					Mazo sin usar
 					<br>
@@ -12,19 +12,10 @@
 					Usadas
 				</div>
 			</div>
-			<div class="player-center">
-				<h2 class="player-name uk-margin-small-top uk-margin-remove-bottom">
+				<h2 class="player-name">
 					{{player.playerBname}}
 				</h2>
-			</div>
-			<!-- <div class="player-right">
-				<div class="player-life-bar">
-					<span style="height: 45%;"></span>
-				</div>
-				<div class="player-favor-bar">
-					<span style="height: 28%;"></span>
-				</div>
-			</div> -->
+
 			<div class="player-counter">
 				<div class="player-life-counter">
 					<span v-bind:style="{ 'height': player.playerBlife + '%'}"></span>
@@ -34,8 +25,8 @@
 				</div>
 				<div class="player-favor-counter">
 					<span v-bind:style="{ 'height': player.playerBfavor + '%'}"></span>
-					<p class="uk-margin-remove uk-h3">
-						{{player.playerBfavor}}
+					<p class="uk-margin-remove uk-h4">
+						{{player.playerBfavor}}/100
 					</p>
 				</div>
 			</div>
@@ -60,7 +51,7 @@
 		</section>
 
 		<section class="player-area player-bottom">
-			<div class="player-left-cards">
+			<div class="player-side-cards">
 				<div class="player-deck uk-card uk-card-primary">
 					Mazo sin usar
 					<br>
@@ -70,11 +61,10 @@
 					Usadas
 				</div>
 			</div>
-			<div class="player-center">
-				<h2 class="player-name uk-margin-small-top uk-margin-remove-bottom">
-					{{player.playerAname}}
-				</h2>
-			</div>
+			<h2 class="player-name">
+				{{player.playerAname}}
+				carta disponible: {{cardAvailable}}
+			</h2>
 			<div class="player-counter">
 				<div class="player-life-counter">
 					<span v-bind:style="{ 'height': player.playerAlife + '%'}"></span>
@@ -85,13 +75,13 @@
 				<div class="player-favor-counter">
 					<span v-bind:style="{ 'height': player.playerAfavor + '%'}"></span>
 					<p class="uk-margin-remove uk-h3">
-						{{player.playerAfavor}}
+						{{player.playerAfavor}}/100
 					</p>
 				</div>
 			</div>
-			<div class="end-turn">
+			<!-- <div class="end-turn">
 				<button class="uk-button uk-button-primary uk-button-large uk-button-game">Finalizar Turno</button>
-			</div>
+			</div> -->
 			<div class="player-hand uk-container">
 				<CardPlayList :cards="cards || []" v-on:playCard="compare($event,cards.data)"
 				></CardPlayList>
@@ -100,40 +90,39 @@
 
 		<div id="modal-resultado" uk-modal>
 			<div v-if="!finishGame" class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
-				<h3 class="uk-modal-title">
-					Round NUMERO
-				</h3>
-				<div class="uk-grid uk-child-width-1-2@m uk-grid-small uk-margin-bottom" uk-grid v-if="contrincante">
+
+				<div class="turn-result uk-grid uk-child-width-1-2@m uk-grid-small uk-margin-bottom" uk-grid v-if="contrincante" v-bind:class="{ 'player-a-win' : resultado === true}">
 					<div>
-						<div class="uk-card">
+						<div class="uk-card card-player-a">
 							<h4 class="uk-margin-remove">
 								{{ player.playerAname }}
 							</h4>
-							<img class="uk-border-circle uk-align-center uk-margin-remove-bottom" width="150" :src="api_url + participante.attributes.cover.data.attributes.url" />
-							<h2 class="uk-margin-remove">{{participante.attributes.title}}</h2>
+							<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + participante.attributes.cover.data.attributes.url" />
+							<h2 class="card-name">{{participante.attributes.title}}</h2>
 							<h3 class="uk-margin-remove">Poder {{participante.attributes.power}}</h3>
 						</div>
 					</div>
 
 					<div>
-						<div class="uk-card">
+						<div class="uk-card card-player-b">
 							<h4 class="uk-margin-remove">
 								{{ player.playerBname }}
 							</h4>
-							<img class="uk-border-circle uk-align-center uk-margin-remove-bottom" width="150" :src="api_url + contrincante.attributes.cover.data.attributes.url" />
-							<h2 class="uk-margin-remove">{{contrincante.attributes.title}}</h2>
+							<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + contrincante.attributes.cover.data.attributes.url" />
+							<h2 class="card-name">{{contrincante.attributes.title}}</h2>
 							<h3 class="uk-margin-remove">Poder: {{contrincante.attributes.power}}</h3>
 						</div>
 					</div>
-
-					<div class="uk-width-1-1">
-						<h3 class="uk-h1 uk-margin-remove uk-text-success" v-if="resultado === true">¡Victoria!</h3>
-						<h3 class="uk-h1 uk-margin-remove uk-text-danger" v-if="resultado === false">Derrota</h3>
-					</div>
 				</div>
 
-				<button class="uk-button uk-button-primary uk-button-large uk-modal-close uk-margin-medium-top" type="button">
-					Siguiente Round
+				<h3 class="uk-text-success uk-margin-remove uk-h2" v-if="resultado === true">¡Victoria!</h3>
+				<h3 class="uk-text-danger uk-margin-remove uk-h2" v-if="resultado === false">Derrota</h3>
+				<p v-if="resultado === false" class="uk-text-danger uk-text-lead uk-margin-remove">
+					Pierdes el Turno y 10 puntos de Vida
+				</p>
+
+				<button class="uk-button uk-button-primary uk-button-large uk-modal-close" type="button">
+					Siguiente Turno
 				</button>
 			</div>
 
@@ -181,6 +170,7 @@
 					playerBlife: 100,
 					playerBfavor: 10,
 				},
+				cardAvailable: false,
 				finishGame: false,
 			}
 		},
@@ -197,9 +187,18 @@
 		methods:{
 			compare(id,cards) {
 				if(this.finishGame === false) {
-					this.battleCards(id,cards);
-					this.applyLifeChanges();
 					this.finalResult();
+					this.battleCards(id,cards);
+					this.cardCost();
+					this.applyLifeChanges();
+				}
+			},
+			/* Indica si la carta esta disponible para ser costeada */
+			cardCost() {
+				this.cardAvailable = false;
+
+				if(this.player.playerAfavor >= 5) {
+					this.cardAvailable = true;
 				}
 			},
 			battleCards(id,cards) {
@@ -212,16 +211,19 @@
 				this.resultado = card.attributes.power > randomCard.attributes.power;
 				this.contrincante = randomCard;
 				this.participante = card;
-;
+
+				/* Paga el coste de la carta con favor */
+				this.player.playerAfavor -= card.attributes.favor;
+				this.player.playerBfavor -= randomCard.attributes.favor;
 			},
 			applyLifeChanges() {
 				if(this.resultado === true) {
-					this.player.playerBlife -= 10;
+					this.player.playerBlife -= 5;
 					this.player.playerAfavor += 10;
 					this.player.playerBfavor += 10;
 				}
 				else {
-					this.player.playerAlife -= 10;
+					this.player.playerAlife -= 5;
 					this.player.playerAfavor += 10;
 					this.player.playerBfavor += 10;
 				}

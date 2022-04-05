@@ -1,7 +1,7 @@
 <template>
 	<div class="player-hand-grid">
 		<article class="card-character uk-card uk-card-default uk-card-small uk-card-body uk-text-center" v-for="card in listCards" v-bind:key="card.attributes.id" v-bind:class="card.attributes.culture">
-			<div class="card-power">
+			<div class="card-favor">
 				<h3 class="uk-margin-remove">
 					{{card.attributes.favor}}
 				</h3>
