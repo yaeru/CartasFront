@@ -115,6 +115,7 @@ query cardsQuery {
         shortDescription
         description
         power
+        favor
         culture {
           data {
             id
