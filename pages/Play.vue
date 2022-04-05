@@ -9,7 +9,7 @@
 					23
 				</div>
 				<div class="player-cementery uk-card uk-card-default" v-if="contrincante">
-						{{contrincante.attributes.title}}
+					{{contrincante.attributes.title}}
 				</div>	
 			</div>
 			<h2 class="player-name">
@@ -58,7 +58,7 @@
 					23
 				</div>
 				<div class="player-cementery uk-card uk-card-default" v-if="contrincante">
-						{{participante.attributes.title}}
+					{{participante.attributes.title}}
 				</div>
 			</div>
 			<h2 class="player-name">
@@ -78,9 +78,11 @@
 					</p>
 				</div>
 			</div>
-			<!-- <div class="end-turn">
-				<button class="uk-button uk-button-primary uk-button-large uk-button-game">Finalizar Turno</button>
-			</div> -->
+			<div class="end-turn">
+				<button class="uk-button uk-button-primary uk-button-large uk-button-game" v-on:click="getRandomCards()">
+					Finalizar Turno
+				</button>
+			</div>
 			<div class="player-hand uk-container">
 				<CardPlayList :cards="cards || []" v-on:playCard="compare($event,cards.data)"
 				></CardPlayList>
@@ -88,56 +90,92 @@
 		</section>
 
 		<div id="modal-resultado" uk-modal="esc-close: false; bg-close: false;">
-			<div v-if="!finishGame" class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
+			<div  class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
+				
+				<div>
+					<div class="turn-result uk-grid uk-child-width-1-2 uk-grid-small uk-margin-bottom" uk-grid v-if="contrincante" v-bind:class="{ 'player-a-win' : resultado === true}">
+						<div>
+							<div class="uk-card card-player-a">
+								<h4 class="uk-margin-remove">
+									{{ player.playerAname }}
+								</h4>
+								<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + participante.attributes.cover.data.attributes.url" />
+								<h2 class="card-name">{{participante.attributes.title}}</h2>
+								<h3 class="uk-margin-remove">Poder {{participante.attributes.power}}</h3>
+							</div>
+						</div>
 
-				<div class="turn-result uk-grid uk-child-width-1-2 uk-grid-small uk-margin-bottom" uk-grid v-if="contrincante" v-bind:class="{ 'player-a-win' : resultado === true}">
-					<div>
-						<div class="uk-card card-player-a">
-							<h4 class="uk-margin-remove">
-								{{ player.playerAname }}
-							</h4>
-							<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + participante.attributes.cover.data.attributes.url" />
-							<h2 class="card-name">{{participante.attributes.title}}</h2>
-							<h3 class="uk-margin-remove">Poder {{participante.attributes.power}}</h3>
+						<div>
+							<div class="uk-card card-player-b">
+								<h4 class="uk-margin-remove">
+									{{ player.playerBname }}
+								</h4>
+								<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + contrincante.attributes.cover.data.attributes.url" />
+								<h2 class="card-name">{{contrincante.attributes.title}}</h2>
+								<h3 class="uk-margin-remove">Poder: {{contrincante.attributes.power}}</h3>
+							</div>
 						</div>
 					</div>
 
-					<div>
-						<div class="uk-card card-player-b">
-							<h4 class="uk-margin-remove">
-								{{ player.playerBname }}
-							</h4>
-							<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + contrincante.attributes.cover.data.attributes.url" />
-							<h2 class="card-name">{{contrincante.attributes.title}}</h2>
-							<h3 class="uk-margin-remove">Poder: {{contrincante.attributes.power}}</h3>
-						</div>
-					</div>
+					<h3 class="uk-text-success uk-margin-remove uk-h2" v-if="resultado === true">¡Victoria!</h3>
+					<h3 class="uk-text-danger uk-margin-remove uk-h2" v-if="resultado === false">Derrota</h3>
+					<p v-if="resultado === false" class="uk-text-danger uk-text-lead uk-margin-remove">
+						Pierdes el Turno y 10 puntos de Vida
+					</p>
 				</div>
 
-				<h3 class="uk-text-success uk-margin-remove uk-h2" v-if="resultado === true">¡Victoria!</h3>
-				<h3 class="uk-text-danger uk-margin-remove uk-h2" v-if="resultado === false">Derrota</h3>
-				<p v-if="resultado === false" class="uk-text-danger uk-text-lead uk-margin-remove">
-					Pierdes el Turno y 10 puntos de Vida
-				</p>
-
-				<button class="uk-button uk-button-primary uk-button-large uk-modal-close" type="button">
-					Siguiente Turno
+				<button v-if="!finishGame" class="uk-button uk-button-primary uk-button-large uk-button-game uk-modal-close" type="button">
+					Siguiente
+				</button>
+				<button v-if="finishGame" class="uk-button uk-button-primary uk-button-large uk-button-game uk-modal-close" type="button" uk-toggle="#openmodal">
+					Siguiente
 				</button>
 			</div>
 
-			<div v-if="finishGame && winner === player.playerAname" class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
+			<!-- <div v-if="finishGame && winner === player.playerAname" class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
 				<h3 class="uk-modal-title">
 					Ganaste la Partida
 				</h3>
 				<p>
 					ganador: {{ winner }}
 				</p>
+				<button class="uk-button uk-button-primary uk-button-large uk-modal-close" type="button">
+					Nuevo Juego (no anda)
+				</button>
 			</div>
 
 			<div v-if="finishGame && winner === player.playerBname" class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
 				<h3 class="uk-modal-title">
 					Perdiste la Partida
 				</h3>
+				<button class="uk-button uk-button-primary uk-button-large uk-modal-close" type="button">
+					Nuevo Juego (no anda)
+				</button>
+			</div> -->
+		</div>
+
+		<div id="openmodal" uk-modal="esc-close: false; bg-close: false;">
+			<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
+				<div v-if="finishGame && winner === player.playerAname">
+					<h3 class="uk-modal-title">
+						Ganaste la Partida
+					</h3>
+					<p>
+						ganador: {{ winner }}
+					</p>
+				</div>
+
+				<div v-if="finishGame && winner === player.playerBname">
+					<h3 class="uk-modal-title">
+						Perdiste la Partida
+					</h3>
+					<p>
+						ganador: {{ winner }}
+					</p>
+				</div>
+				<button class="uk-button uk-button-primary uk-button-large uk-button-game uk-modal-close" type="button">
+					Nuevo Juego (no anda)
+				</button>
 			</div>
 		</div>
 	</section>
@@ -169,7 +207,7 @@
 					playerBlife: 100,
 					playerBfavor: 10,
 				},
-				cardAvailable: true,
+				//cardAvailable: true,
 				finishGame: false,
 			}
 		},
@@ -186,10 +224,10 @@
 		methods:{
 			compare(id,cards) {
 				if(this.finishGame === false) {
-					this.finalResult();
 					this.battleCards(id,cards);
 					this.applyLifeChanges();
-					this.getRandomCards(cards);
+					this.finalResult();
+					//this.getRandomCards(cards);
 				}
 			},
 			battleCards(id,cards) {
@@ -209,12 +247,12 @@
 			},
 			applyLifeChanges() {
 				if(this.resultado === true) {
-					this.player.playerBlife -= 5;
+					this.player.playerBlife -= 10;
 					this.player.playerAfavor += 10;
 					this.player.playerBfavor += 10;
 				}
 				else {
-					this.player.playerAlife -= 5;
+					this.player.playerAlife -= 10;
 					this.player.playerAfavor += 10;
 					this.player.playerBfavor += 10;
 				}
@@ -230,12 +268,20 @@
 					this.finishGame = true;
 					this.winner = this.player.playerAname;
 				}
+				console.log('termino el juego? ', this.finishGame);
+				
+				/*if (this.finishGame === true) {
+					modalFinalResults(); {
+						("#openmodal").trigger("click");
+					}
+				}*/
 			},
-			getRandomCards(cards) {
-				const randomCards = [];
-				const randomCardsIds = [];
+			
+			getRandomCards(id,cards) {
+				var randomCards = [];
+				var randomCardsIds = [];
 				while (randomCards.length < 5) {
-					const randomIndex = Math.floor(Math.random()*cards.length);
+					var randomIndex = 5;
 					if (randomCardsIds.indexOf(randomIndex) === -1) {
 						randomCardsIds.push(randomIndex);
 						randomCards.push(cards[randomIndex]);
