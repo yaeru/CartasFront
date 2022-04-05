@@ -14,6 +14,7 @@
 
 			<div class="card-info">
 				<h3 class="uk-h2 uk-margin-remove">
+					disp: {{cardAvailable}}
 					{{card.attributes.title}} <img src="@/assets/img/greek.png" width="30">
 				</h3>
 				<p class="uk-text-muted uk-h4 uk-margin-remove uk-hidden">

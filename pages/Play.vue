@@ -8,13 +8,13 @@
 					<br>
 					23
 				</div>
-				<div class="player-cementery uk-card uk-card-default">
-					Usadas
-				</div>
+				<div class="player-cementery uk-card uk-card-default" v-if="contrincante">
+						{{contrincante.attributes.title}}
+				</div>	
 			</div>
-				<h2 class="player-name">
-					{{player.playerBname}}
-				</h2>
+			<h2 class="player-name">
+				{{player.playerBname}}
+			</h2>
 
 			<div class="player-counter">
 				<div class="player-life-counter">
@@ -57,13 +57,12 @@
 					<br>
 					23
 				</div>
-				<div class="player-cementery uk-card uk-card-default">
-					Usadas
+				<div class="player-cementery uk-card uk-card-default" v-if="contrincante">
+						{{participante.attributes.title}}
 				</div>
 			</div>
 			<h2 class="player-name">
 				{{player.playerAname}}
-				carta disponible: {{cardAvailable}}
 			</h2>
 			<div class="player-counter">
 				<div class="player-life-counter">
@@ -88,10 +87,10 @@
 			</div>
 		</section>
 
-		<div id="modal-resultado" uk-modal>
+		<div id="modal-resultado" uk-modal="esc-close: false; bg-close: false;">
 			<div v-if="!finishGame" class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
 
-				<div class="turn-result uk-grid uk-child-width-1-2@m uk-grid-small uk-margin-bottom" uk-grid v-if="contrincante" v-bind:class="{ 'player-a-win' : resultado === true}">
+				<div class="turn-result uk-grid uk-child-width-1-2 uk-grid-small uk-margin-bottom" uk-grid v-if="contrincante" v-bind:class="{ 'player-a-win' : resultado === true}">
 					<div>
 						<div class="uk-card card-player-a">
 							<h4 class="uk-margin-remove">
@@ -170,7 +169,7 @@
 					playerBlife: 100,
 					playerBfavor: 10,
 				},
-				cardAvailable: false,
+				cardAvailable: true,
 				finishGame: false,
 			}
 		},
@@ -189,16 +188,8 @@
 				if(this.finishGame === false) {
 					this.finalResult();
 					this.battleCards(id,cards);
-					this.cardCost();
 					this.applyLifeChanges();
-				}
-			},
-			/* Indica si la carta esta disponible para ser costeada */
-			cardCost() {
-				this.cardAvailable = false;
-
-				if(this.player.playerAfavor >= 5) {
-					this.cardAvailable = true;
+					this.getRandomCards(cards);
 				}
 			},
 			battleCards(id,cards) {
@@ -239,7 +230,20 @@
 					this.finishGame = true;
 					this.winner = this.player.playerAname;
 				}
-			}
+			},
+			getRandomCards(cards) {
+				const randomCards = [];
+				const randomCardsIds = [];
+				while (randomCards.length < 5) {
+					const randomIndex = Math.floor(Math.random()*cards.length);
+					if (randomCardsIds.indexOf(randomIndex) === -1) {
+						randomCardsIds.push(randomIndex);
+						randomCards.push(cards[randomIndex]);
+					}
+				}
+				return randomCards;
+				console.log('la mano es', randomCards);
+			},
 		}
 	}
 </script>
