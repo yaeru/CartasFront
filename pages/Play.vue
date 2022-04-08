@@ -1,184 +1,184 @@
 <template>
-	<section id="PlayStage">
-
-		<section class="player-area player-top">
-			<div class="player-side-cards">
-				<div class="player-deck uk-card uk-card-primary">
-					Mazo sin usar
-					<br>
-					23
-				</div>
-				<div class="player-cementery uk-card uk-card-default" v-if="contrincante">
-					{{contrincante.attributes.title}}
-				</div>	
-			</div>
-			<h2 class="player-name">
-				{{player.playerBname}}
-			</h2>
-
-			<div class="player-counter">
-				<div class="player-life-counter">
-					<span v-bind:style="{ 'height': player.playerBlife + '%'}"></span>
-					<p class="uk-margin-remove uk-h1">
-						{{player.playerBlife}}
-					</p>
-				</div>
-				<div class="player-favor-counter">
-					<span v-bind:style="{ 'height': player.playerBfavor + '%'}"></span>
-					<p class="uk-margin-remove uk-h4">
-						{{player.playerBfavor}}/100
-					</p>
-				</div>
-			</div>
-			<div class="player-hand uk-container">
-				<div class="player-hand-grid">
-					<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
-					</article>
-					<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
-					</article>
-					<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
-					</article>
-					<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
-					</article>
-					<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
-					</article>
-					<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
-					</article>
-					<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
-					</article>
-				</div>
+	<div>
+		<section id="PlayStage" v-if="gameOn === false">
+			<div class="uk-flex uk-flex-middle uk-flex-center uk-height-1-1 uk-text-center">
+				<form class="uk-form">
+					<div class="uk-margin">
+						<label class="uk-h3">
+							Ingresa tu nombre
+						</label>
+						<input type="text" v-model="player.playerAname" class="uk-input uk-form-large" placeholder="Tu Nombre" maxlength="30">
+					</div>
+					<div class="uk-margin">
+						<button class="uk-button uk-button-primary uk-button-large uk-button-game" @click="gameOn = !gameOn">
+							Iniciar Partida
+						</button>
+					</div>
+				</form>
 			</div>
 		</section>
 
-		<section class="player-area player-bottom">
-			<div class="player-side-cards">
-				<div class="player-deck uk-card uk-card-primary">
-					Mazo sin usar
-					<br>
-					23
-				</div>
-				<div class="player-cementery uk-card uk-card-default" v-if="contrincante">
-					{{participante.attributes.title}}
-				</div>
-			</div>
-			<h2 class="player-name">
-				{{player.playerAname}}
-			</h2>
-			<div class="player-counter">
-				<div class="player-life-counter">
-					<span v-bind:style="{ 'height': player.playerAlife + '%'}"></span>
-					<p class="uk-margin-remove uk-h1">
-						{{player.playerAlife}}
-					</p>
-				</div>
-				<div class="player-favor-counter">
-					<span v-bind:style="{ 'height': player.playerAfavor + '%'}"></span>
-					<p class="uk-margin-remove uk-h3">
-						{{player.playerAfavor}}/100
-					</p>
-				</div>
-			</div>
-			<div class="end-turn">
-				<button class="uk-button uk-button-primary uk-button-large uk-button-game" v-on:click="getRandomCards()">
-					Finalizar Turno
-				</button>
-			</div>
-			<div class="player-hand uk-container">
-				<CardPlayList :cards="cards || []" v-on:playCard="compare($event,cards.data)"
-				></CardPlayList>
-			</div>
-		</section>
-
-		<div id="modal-resultado" uk-modal="esc-close: false; bg-close: false;">
-			<div  class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
-				
-				<div>
-					<div class="turn-result uk-grid uk-child-width-1-2 uk-grid-small uk-margin-bottom" uk-grid v-if="contrincante" v-bind:class="{ 'player-a-win' : resultado === true}">
-						<div>
-							<div class="uk-card card-player-a">
-								<h4 class="uk-margin-remove">
-									{{ player.playerAname }}
-								</h4>
-								<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + participante.attributes.cover.data.attributes.url" />
-								<h2 class="card-name">{{participante.attributes.title}}</h2>
-								<h3 class="uk-margin-remove">Poder {{participante.attributes.power}}</h3>
-							</div>
+		<transition name="fade">
+			<section id="PlayStage" v-if="gameOn">
+				<section class="player-area player-top">
+					<div class="player-side-cards">
+						<div class="player-deck uk-card uk-card-primary">
+							Mazo sin usar
+							<br>
+							23
 						</div>
+						<div class="player-cementery uk-card uk-card-default" v-if="contrincante">
+							{{contrincante.attributes.title}}
+						</div>	
+					</div>
+					<h2 class="player-name">
+						{{player.playerBname}}
+					</h2>
 
-						<div>
-							<div class="uk-card card-player-b">
-								<h4 class="uk-margin-remove">
-									{{ player.playerBname }}
-								</h4>
-								<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + contrincante.attributes.cover.data.attributes.url" />
-								<h2 class="card-name">{{contrincante.attributes.title}}</h2>
-								<h3 class="uk-margin-remove">Poder: {{contrincante.attributes.power}}</h3>
-							</div>
+					<div class="player-counter">
+						<div class="player-life-counter">
+							<span v-bind:style="{ 'height': player.playerBlife + '%'}"></span>
+							<p class="uk-margin-remove uk-h1">
+								{{player.playerBlife}}
+							</p>
+						</div>
+						<div class="player-favor-counter">
+							<span v-bind:style="{ 'height': player.playerBfavor + '%'}"></span>
+							<p class="uk-margin-remove uk-h4">
+								{{player.playerBfavor}}/100
+							</p>
 						</div>
 					</div>
+					<div class="player-hand uk-container">
+						<div class="player-hand-grid">
+							<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
+							</article>
+							<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
+							</article>
+							<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
+							</article>
+							<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
+							</article>
+							<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
+							</article>
+							<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
+							</article>
+							<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
+							</article>
+						</div>
+					</div>
+				</section>
 
-					<h3 class="uk-text-success uk-margin-remove uk-h2" v-if="resultado === true">¡Victoria!</h3>
-					<h3 class="uk-text-danger uk-margin-remove uk-h2" v-if="resultado === false">Derrota</h3>
-					<p v-if="resultado === false" class="uk-text-danger uk-text-lead uk-margin-remove">
-						Pierdes el Turno y 10 puntos de Vida
-					</p>
+				<section class="player-area player-bottom">
+					<div class="player-side-cards">
+						<div class="player-deck uk-card uk-card-primary">
+							Mazo sin usar
+							<br>
+							23
+						</div>
+						<div class="player-cementery uk-card uk-card-default" v-if="contrincante">
+							{{participante.attributes.title}}
+						</div>
+					</div>
+					<h2 class="player-name">
+						{{player.playerAname}}
+					</h2>
+					<div class="player-counter">
+						<div class="player-life-counter">
+							<span v-bind:style="{ 'height': player.playerAlife + '%'}"></span>
+							<p class="uk-margin-remove uk-h1">
+								{{player.playerAlife}}
+							</p>
+						</div>
+						<div class="player-favor-counter">
+							<span v-bind:style="{ 'height': player.playerAfavor + '%'}"></span>
+							<p class="uk-margin-remove uk-h3">
+								{{player.playerAfavor}}/100
+							</p>
+						</div>
+					</div>
+					<div class="end-turn">
+						<button class="uk-button uk-button-primary uk-button-large uk-button-game" v-on:click="getRandomCards()">
+							Finalizar Turno
+						</button>
+					</div>
+					<div class="player-hand uk-container">
+						<CardPlayList :cards="cards || []" v-on:playCard="compare($event,cards.data)"
+						></CardPlayList>
+					</div>
+				</section>
+
+				<div id="modal-resultado" uk-modal="esc-close: false; bg-close: false;">
+					<div  class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
+
+						<div>
+							<div class="turn-result uk-grid uk-child-width-1-2 uk-grid-small uk-margin-bottom" uk-grid v-if="contrincante" v-bind:class="{ 'player-a-win' : resultado === true}">
+								<div>
+									<div class="uk-card card-player-a">
+										<h4 class="uk-margin-remove">
+											{{ player.playerAname }}
+										</h4>
+										<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + participante.attributes.cover.data.attributes.url" />
+										<h2 class="card-name">{{participante.attributes.title}}</h2>
+										<h3 class="uk-margin-remove">Poder {{participante.attributes.power}}</h3>
+									</div>
+								</div>
+
+								<div>
+									<div class="uk-card card-player-b">
+										<h4 class="uk-margin-remove">
+											{{ player.playerBname }}
+										</h4>
+										<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + contrincante.attributes.cover.data.attributes.url" />
+										<h2 class="card-name">{{contrincante.attributes.title}}</h2>
+										<h3 class="uk-margin-remove">Poder: {{contrincante.attributes.power}}</h3>
+									</div>
+								</div>
+							</div>
+
+							<h3 class="uk-text-success uk-margin-remove uk-h2" v-if="resultado === true">¡Victoria!</h3>
+							<h3 class="uk-text-danger uk-margin-remove uk-h2" v-if="resultado === false">Derrota</h3>
+							<p v-if="resultado === false" class="uk-text-danger uk-text-lead uk-margin-remove">
+								Pierdes el Turno y 10 puntos de Vida
+							</p>
+						</div>
+
+						<button v-if="!finishGame" class="uk-button uk-button-primary uk-button-large uk-button-game uk-modal-close" type="button">
+							Siguiente
+						</button>
+						<button v-if="finishGame" class="uk-button uk-button-primary uk-button-large uk-button-game uk-modal-close" type="button" uk-toggle="#openmodal">
+							Siguiente
+						</button>
+					</div>
 				</div>
 
-				<button v-if="!finishGame" class="uk-button uk-button-primary uk-button-large uk-button-game uk-modal-close" type="button">
-					Siguiente
-				</button>
-				<button v-if="finishGame" class="uk-button uk-button-primary uk-button-large uk-button-game uk-modal-close" type="button" uk-toggle="#openmodal">
-					Siguiente
-				</button>
-			</div>
+				<div id="openmodal" uk-modal="esc-close: false; bg-close: false;">
+					<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
+						<div v-if="finishGame && winner === player.playerAname">
+							<h3 class="uk-modal-title">
+								Ganaste la Partida
+							</h3>
+							<p>
+								ganador: {{ winner }}
+							</p>
+						</div>
 
-			<!-- <div v-if="finishGame && winner === player.playerAname" class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
-				<h3 class="uk-modal-title">
-					Ganaste la Partida
-				</h3>
-				<p>
-					ganador: {{ winner }}
-				</p>
-				<button class="uk-button uk-button-primary uk-button-large uk-modal-close" type="button">
-					Nuevo Juego (no anda)
-				</button>
-			</div>
-
-			<div v-if="finishGame && winner === player.playerBname" class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
-				<h3 class="uk-modal-title">
-					Perdiste la Partida
-				</h3>
-				<button class="uk-button uk-button-primary uk-button-large uk-modal-close" type="button">
-					Nuevo Juego (no anda)
-				</button>
-			</div> -->
-		</div>
-
-		<div id="openmodal" uk-modal="esc-close: false; bg-close: false;">
-			<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
-				<div v-if="finishGame && winner === player.playerAname">
-					<h3 class="uk-modal-title">
-						Ganaste la Partida
-					</h3>
-					<p>
-						ganador: {{ winner }}
-					</p>
+						<div v-if="finishGame && winner === player.playerBname">
+							<h3 class="uk-modal-title">
+								Perdiste la Partida
+							</h3>
+							<p>
+								ganador: {{ winner }}
+							</p>
+						</div>
+						<button class="uk-button uk-button-primary uk-button-large uk-button-game uk-modal-close" type="button">
+							Nuevo Juego (no anda)
+						</button>
+					</div>
 				</div>
-
-				<div v-if="finishGame && winner === player.playerBname">
-					<h3 class="uk-modal-title">
-						Perdiste la Partida
-					</h3>
-					<p>
-						ganador: {{ winner }}
-					</p>
-				</div>
-				<button class="uk-button uk-button-primary uk-button-large uk-button-game uk-modal-close" type="button">
-					Nuevo Juego (no anda)
-				</button>
-			</div>
-		</div>
-	</section>
+			</section>
+		</transition>
+	</div>
 </template>
 
 <script>
@@ -191,16 +191,18 @@
 
 		data() {
 			return {
+				message: null,
 				api_url: "http://localhost:1337",
 				cards: [],
 				loading: 0,
 				moment: moment,
+				gameOn: false,
 				resultado: null,
 				participante: '',
 				contrincante: '',
 				winner: '',
 				player: {
-					playerAname: 'Jugador A',
+					playerAname: null,
 					playerAlife: 100,
 					playerAfavor: 10,
 					playerBname: 'Computadora',
@@ -226,8 +228,8 @@
 				if(this.finishGame === false) {
 					this.battleCards(id,cards);
 					this.applyLifeChanges();
+					//setTimeout(() => {}, 4000);
 					this.finalResult();
-					//this.getRandomCards(cards);
 				}
 			},
 			battleCards(id,cards) {
@@ -247,15 +249,16 @@
 			},
 			applyLifeChanges() {
 				if(this.resultado === true) {
-					this.player.playerBlife -= 10;
+					this.player.playerBlife -= 50;
 					this.player.playerAfavor += 10;
 					this.player.playerBfavor += 10;
 				}
 				else {
-					this.player.playerAlife -= 10;
+					this.player.playerAlife -= 50;
 					this.player.playerAfavor += 10;
 					this.player.playerBfavor += 10;
 				}
+				
 			},
 			finalResult() {
 				this.finishGame = false;
