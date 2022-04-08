@@ -4,13 +4,13 @@
 			<div class="uk-flex uk-flex-middle uk-flex-center uk-height-1-1 uk-text-center">
 				<form class="uk-form">
 					<div class="uk-margin">
-						<label class="uk-h3">
+						<label class="uk-h3 uk-display-inline-block">
 							Ingresa tu nombre
 						</label>
-						<input type="text" v-model="player.playerAname" class="uk-input uk-form-large" placeholder="Tu Nombre" maxlength="30">
+						<input type="text" v-model="player.playerAname" class="uk-input uk-form-large" placeholder="Tu Nombre" maxlength="30" required>
 					</div>
-					<div class="uk-margin">
-						<button class="uk-button uk-button-primary uk-button-large uk-button-game" @click="gameOn = !gameOn">
+					<div class="uk-margin-medium">
+						<button class="uk-button uk-button-primary uk-button-large uk-button-game" @click="gameOn = !gameOn"  :disabled="player.playerAname === '' ">
 							Iniciar Partida
 						</button>
 					</div>
@@ -191,7 +191,6 @@
 
 		data() {
 			return {
-				message: null,
 				api_url: "http://localhost:1337",
 				cards: [],
 				loading: 0,
@@ -202,7 +201,7 @@
 				contrincante: '',
 				winner: '',
 				player: {
-					playerAname: null,
+					playerAname: '',
 					playerAlife: 100,
 					playerAfavor: 10,
 					playerBname: 'Computadora',
