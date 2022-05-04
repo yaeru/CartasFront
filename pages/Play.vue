@@ -61,10 +61,6 @@
 							</article>
 							<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
 							</article>
-							<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
-							</article>
-							<article class="card-character uk-card uk-card-default uk-card-small uk-card-body">
-							</article>
 						</div>
 					</div>
 				</section>
@@ -218,7 +214,6 @@
 					favor: 10,
 					turno: null,
 				},
-				cardAvailable: null,
 				finishGame: false,
 			}
 		},
@@ -281,7 +276,6 @@
 					this.battleCards(id,cards);
 					this.applyLifeChanges();
 					this.finalResult();
-					this.cardDisponible(id,cards);
 				}
 			},
 			battleCards(id,cards) {
@@ -312,17 +306,6 @@
 				/* Paga el coste de la carta con favor */
 				this.playerA.favor -= card.attributes.favor;
 				this.playerB.favor -= randomCard.attributes.favor;
-			},
-			cardDisponible(id,cards) {
-				var card = cards.filter(card => card.id == id)[0];
-
-				if(card.attributes.favor > this.playerA.favor) {
-					this.cardAvailable = false;
-				}
-				else {
-					this.cardAvailable = true;
-				}
-				console.log('las cartas son disponibles?', this.cardAvailable);
 			},
 			applyLifeChanges() {
 				if(this.resultado === true) {

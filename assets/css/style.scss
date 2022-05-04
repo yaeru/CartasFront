@@ -152,9 +152,11 @@ $modal-dialog-width:                             800px !default;
 		inset 1px 2px 2px rgba(#fff, 0.5),
 		inset -2px -2px 2px rgba(#000, 0.3),
 		inset 0 0 12px rgba(#000, 0.5),
-		0 3px 7px rgba(#000, 0.1),
-		;
+		0 3px 7px rgba(#000, 0.1);
 		text-shadow: 0 2px 3px rgba(#000, 0.8);
+		&:disabled {
+			filter: grayscale(1);
+		}
 	}
 }
 
@@ -222,6 +224,9 @@ $modal-dialog-width:                             800px !default;
 		background-color: $global-favor-base;
 		box-shadow: inset 0 0 20px $global-favor-glow, 0 0 20px $global-favor-glow;
 		border-color: #fff;
+		&.card-favor-diseabled {
+			filter: grayscale(1);
+		}
 	}
 	.card-attack {
 		bottom: -5px;
@@ -310,8 +315,8 @@ $modal-dialog-width:                             800px !default;
 				}
 			}
 			.player-name {
-				top: 140px;
-				bottom: unset;
+				top: unset;
+				bottom: 100px;
 			}
 			.player-counter {
 				top: 30px;
@@ -324,27 +329,20 @@ $modal-dialog-width:                             800px !default;
 				.player-hand-grid {
 					.card-character {
 						background-color: $global-primary-background;
-
 						&:nth-child(1) {
-							transform: rotate(13deg);
-						}
-						&:nth-child(2) {
 							transform: rotate(8deg) translateY(65px);
 						}
-						&:nth-child(3) {
+						&:nth-child(2) {
 							transform: rotate(4deg) translateY(100px);
 						}
-						&:nth-child(4) {
+						&:nth-child(3) {
 							transform: rotate(0deg) translateY(115px);
 						}
-						&:nth-child(5) {
+						&:nth-child(4) {
 							transform: rotate(-4deg) translateY(100px);
 						}
-						&:nth-child(6) {
+						&:nth-child(5) {
 							transform: rotate(-8deg) translateY(65px);
-						}
-						&:nth-child(7) {
-							transform: rotate(-13deg);
 						}
 					}
 				}
@@ -393,7 +391,7 @@ $modal-dialog-width:                             800px !default;
 			position: absolute;
 			left: 0;
 			right: 0;
-			bottom: 200px;
+			top: 100px;
 			text-align: center;
 		}
 		.player-counter {

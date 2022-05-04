@@ -1,19 +1,19 @@
 <template>
 	<div class="player-hand-grid">
 		<article class="card-character uk-card uk-card-default uk-card-small uk-card-body uk-text-center" v-for="card in listCards" v-bind:key="card.attributes.id" v-bind:class="card.attributes.culture">
-			<div class="card-circle card-favor">
+			<div class="card-circle card-favor" v-bind:class="{ 'card-favor-diseabled' : card.attributes.favor > playerA.favor}">
 				<h3 class="uk-margin-remove">
-					{{card.attributes.favor}}
+					{{ card.attributes.favor }}
 				</h3>
 			</div>
 			<div class="card-circle card-attack">
 				<h3 class="uk-margin-remove">
-					{{card.attributes.attack}}
+					{{ card.attributes.attack }}
 				</h3>
 			</div>
 			<div class="card-circle card-life">
 				<h3 class="uk-margin-remove">
-					{{card.attributes.life}}
+					{{ card.attributes.life }}
 				</h3>
 			</div>
 
@@ -33,9 +33,11 @@
 					{{ card.attributes.shortDescription }}
 				</p>
 			</div>
-
 			
-			<button v-on:click="$emit('playCard',card.id)" class="uk-button uk-button-primary uk-button-action" uk-toggle="#modal-resultado">
+			<button v-on:click="$emit('playCard',card.id)" class="uk-button uk-button-primary uk-button-action" uk-toggle="#modal-resultado" v-if="playerA.favor > card.attributes.favor">
+				Jugar Carta
+			</button>
+			<button class="uk-button uk-button-primary uk-button-action" v-else disabled>
 				Jugar Carta
 			</button>
 		</article>
@@ -50,10 +52,15 @@
 		name: 'CardPlayList',
 		props: {
 			cards: Array,
+			//playerA: Array,
 		},
 		data() {
 			return {
 				api_url: "http://localhost:1337",
+				cardAvailable: null,
+				playerA: {
+					favor: 10,
+				},
 			}
 		},
 		computed: {
@@ -61,8 +68,15 @@
 				return _.orderBy(this.cards, 'card.attributes.title', 'desc'); 
 			}
 		},
-		methods:{
-			
-		}
+		// methods:{
+		// 	cardDisponible(cards) {
+		// 		if(card.attributes.favor > this.playerA.favor) {
+		// 			this.cardAvailable = false;
+		// 		}
+		// 		else {
+		// 			this.cardAvailable = true;
+		// 		}
+		// 	},
+		// }
 	}
 </script>
