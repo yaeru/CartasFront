@@ -24,7 +24,9 @@ query culturesQuery {
             attributes {
               title
               shortDescription
-              power
+              favor
+              attack
+              life
               culture {
                 data {
                   id
@@ -76,7 +78,9 @@ query cultureQuery($id: ID!) {
             attributes {
               title
               shortDescription
-              power
+              favor
+              attack
+              life
               culture {
                 data {
                   id
@@ -114,8 +118,9 @@ query cardsQuery {
         title
         shortDescription
         description
-        power
         favor
+        attack
+        life
         culture {
           data {
             id
@@ -150,7 +155,9 @@ query cardQuery($id: ID!) {
         title
         shortDescription
         description
-        power
+        favor
+        attack
+        life
         culture {
           data {
             id
@@ -205,7 +212,7 @@ query deckQuery($id: ID!) {
             attributes {
               title
               shortDescription
-              power
+              attack
               culture {
                 data {
                   id

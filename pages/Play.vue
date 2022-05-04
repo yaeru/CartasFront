@@ -7,10 +7,10 @@
 						<label class="uk-h3 uk-display-inline-block">
 							Ingresa tu nombre
 						</label>
-						<input type="text" v-model="player.playerAname" class="uk-input uk-form-large" placeholder="Tu Nombre" maxlength="30" required>
+						<input type="text" v-model="playerA.name" autofocus class="uk-input uk-form-large" placeholder="Tu Nombre" maxlength="30" required>
 					</div>
 					<div class="uk-margin-medium">
-						<button class="uk-button uk-button-primary uk-button-large uk-button-game" @click="gameOn = !gameOn"  :disabled="player.playerAname === '' ">
+						<button class="uk-button uk-button-primary uk-button-large uk-button-game" @click="startGame(cards.data || [])" :disabled="playerA.name === '' ">
 							Iniciar Partida
 						</button>
 					</div>
@@ -32,20 +32,20 @@
 						</div>	
 					</div>
 					<h2 class="player-name">
-						{{player.playerBname}}
+						{{playerB.name}} {{playerB.turno}}
 					</h2>
 
 					<div class="player-counter">
 						<div class="player-life-counter">
-							<span v-bind:style="{ 'height': player.playerBlife + '%'}"></span>
+							<span v-bind:style="{ 'height': playerB.life + '%'}"></span>
 							<p class="uk-margin-remove uk-h1">
-								{{player.playerBlife}}
+								{{playerB.life}}
 							</p>
 						</div>
 						<div class="player-favor-counter">
-							<span v-bind:style="{ 'height': player.playerBfavor + '%'}"></span>
+							<span v-bind:style="{ 'height': playerB.favor + '%'}"></span>
 							<p class="uk-margin-remove uk-h4">
-								{{player.playerBfavor}}/100
+								{{playerB.favor}}/100
 							</p>
 						</div>
 					</div>
@@ -81,29 +81,29 @@
 						</div>
 					</div>
 					<h2 class="player-name">
-						{{player.playerAname}}
+						{{playerA.name}} {{playerA.turno}}
 					</h2>
 					<div class="player-counter">
 						<div class="player-life-counter">
-							<span v-bind:style="{ 'height': player.playerAlife + '%'}"></span>
+							<span v-bind:style="{ 'height': playerA.life + '%'}"></span>
 							<p class="uk-margin-remove uk-h1">
-								{{player.playerAlife}}
+								{{playerA.life}}
 							</p>
 						</div>
 						<div class="player-favor-counter">
-							<span v-bind:style="{ 'height': player.playerAfavor + '%'}"></span>
+							<span v-bind:style="{ 'height': playerA.favor + '%'}"></span>
 							<p class="uk-margin-remove uk-h3">
-								{{player.playerAfavor}}/100
+								{{playerA.favor}}/100
 							</p>
 						</div>
 					</div>
 					<div class="end-turn">
-						<button class="uk-button uk-button-primary uk-button-large uk-button-game" v-on:click="getRandomCards()">
+						<button class="uk-button uk-button-primary uk-button-large uk-button-game">
 							Finalizar Turno
 						</button>
 					</div>
 					<div class="player-hand uk-container">
-						<CardPlayList :cards="cards || []" v-on:playCard="compare($event,cards.data)"
+						<CardPlayList :cards="pepe || []" v-on:playCard="compare($event,pepe)"
 						></CardPlayList>
 					</div>
 				</section>
@@ -116,30 +116,36 @@
 								<div>
 									<div class="uk-card card-player-a">
 										<h4 class="uk-margin-remove">
-											{{ player.playerAname }}
+											{{ playerA.name }}
 										</h4>
 										<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + participante.attributes.cover.data.attributes.url" />
 										<h2 class="card-name">{{participante.attributes.title}}</h2>
-										<h3 class="uk-margin-remove">Poder {{participante.attributes.power}}</h3>
+										<h3 class="uk-margin-remove">Ataque: {{participante.attributes.attack}}</h3>
+										<h3 class="uk-margin-remove">Vida: {{participante.attributes.life}}</h3>
 									</div>
 								</div>
 
 								<div>
 									<div class="uk-card card-player-b">
 										<h4 class="uk-margin-remove">
-											{{ player.playerBname }}
+											{{ playerB.name }}
 										</h4>
 										<img class="uk-border-circle uk-margin-remove" width="150" :src="api_url + contrincante.attributes.cover.data.attributes.url" />
 										<h2 class="card-name">{{contrincante.attributes.title}}</h2>
-										<h3 class="uk-margin-remove">Poder: {{contrincante.attributes.power}}</h3>
+										<h3 class="uk-margin-remove">Ataque: {{contrincante.attributes.attack}}</h3>
+										<h3 class="uk-margin-remove">Vida: {{contrincante.attributes.life}}</h3>
 									</div>
 								</div>
 							</div>
 
 							<h3 class="uk-text-success uk-margin-remove uk-h2" v-if="resultado === true">¡Victoria!</h3>
 							<h3 class="uk-text-danger uk-margin-remove uk-h2" v-if="resultado === false">Derrota</h3>
-							<p v-if="resultado === false" class="uk-text-danger uk-text-lead uk-margin-remove">
-								Pierdes el Turno y 10 puntos de Vida
+							
+							<p v-if="resultado === true" class="uk-text-lead uk-margin-remove">
+								Ganas el Turno y el enemigo pierde <span class="uk-label">{{ hisDamage }}</span> de Vida
+							</p>
+							<p v-if="resultado === false" class="uk-text-lead uk-margin-remove">
+								Pierdes el Turno y <span class="uk-label">{{ myDamage }}</span> de Vida
 							</p>
 						</div>
 
@@ -154,25 +160,25 @@
 
 				<div id="openmodal" uk-modal="esc-close: false; bg-close: false;">
 					<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
-						<div v-if="finishGame && winner === player.playerAname">
-							<h3 class="uk-modal-title">
-								Ganaste la Partida
+						<div v-if="finishGame && winner === playerA.name">
+							<h3 class="uk-h1">
+								¡Victoria!
 							</h3>
-							<p>
-								ganador: {{ winner }}
+							<p class="uk-text-lead">
+								{{ winner }} gana la partida
 							</p>
 						</div>
 
-						<div v-if="finishGame && winner === player.playerBname">
-							<h3 class="uk-modal-title">
-								Perdiste la Partida
+						<div v-if="finishGame && winner === playerB.name">
+							<h3 class="uk-h1">
+								Derrota
 							</h3>
-							<p>
-								ganador: {{ winner }}
+							<p class="uk-text-lead">
+								{{ winner }} gana la partida
 							</p>
 						</div>
-						<button class="uk-button uk-button-primary uk-button-large uk-button-game uk-modal-close" type="button">
-							Nuevo Juego (no anda)
+						<button @click="newGame(cards.data || [])" class="uk-button uk-button-primary uk-button-large uk-button-game uk-modal-close" type="button">
+							Nuevo Juego
 						</button>
 					</div>
 				</div>
@@ -200,15 +206,19 @@
 				participante: '',
 				contrincante: '',
 				winner: '',
-				player: {
-					playerAname: '',
-					playerAlife: 100,
-					playerAfavor: 10,
-					playerBname: 'Computadora',
-					playerBlife: 100,
-					playerBfavor: 10,
+				playerA: {
+					name: '',
+					life: 100,
+					favor: 10,
+					turno: null,
 				},
-				//cardAvailable: true,
+				playerB: {
+					name: 'Computadora',
+					life: 100,
+					favor: 10,
+					turno: null,
+				},
+				cardAvailable: null,
 				finishGame: false,
 			}
 		},
@@ -223,52 +233,120 @@
 			},
 		},
 		methods:{
+			startGame(cards) {
+				this.gameOn = true;
+				console.log('arranco? ', this.gameOn);
+
+				if(this.gameOn === true) {
+					this.tossCoin();
+					this.selectCards(cards)
+					console.log('cartas seleccionadas ', this.cards);
+				}
+			},
+			// seleccionar 5 cartas aleatorias para cada jugador
+			selectCards(cards) {
+				let playerA = [];
+				let playerB = [];
+
+				for(let i = 0; i < 5; i++) {
+					let random = Math.floor(Math.random() * cards.length);
+					playerA.push(cards[random]);
+					cards.splice(random, 1);
+				}
+
+				for(let i = 0; i < 5; i++) {
+					let random = Math.floor(Math.random() * cards.length);
+					playerB.push(cards[random]);
+					cards.splice(random, 1);
+				}
+
+				this.pepe = playerA;
+			},
+
+			tossCoin() {
+				let coin = Math.floor(Math.random() * 2)
+				if (coin === 0) {
+					this.playerA.turno = '1ero'
+					this.playerB.turno = '2do'
+				} else {
+					this.playerA.turno = '2do'
+					this.playerB.turno = '1ero'
+				}
+				console.log('turno A', this.playerA.turno);
+				console.log('turno B', this.playerB.turno);
+			},
+			
 			compare(id,cards) {
 				if(this.finishGame === false) {
 					this.battleCards(id,cards);
 					this.applyLifeChanges();
-					//setTimeout(() => {}, 4000);
 					this.finalResult();
+					this.cardDisponible(id,cards);
 				}
 			},
 			battleCards(id,cards) {
 				var card = cards.filter(card => card.id == id)[0];
 				var randomCard = cards[Math.floor(Math.random()*cards.length)];
 
-				console.log('es mas fuerte?', card.attributes.power > randomCard.attributes.power);
+				console.log('es mas fuerte?', card.attributes.attack > randomCard.attributes.life);
 				console.log('carta random es', randomCard.attributes.title);
 
-				this.resultado = card.attributes.power > randomCard.attributes.power;
+				this.resultado = card.attributes.attack > randomCard.attributes.life;
 				this.contrincante = randomCard;
 				this.participante = card;
 
+				this.myAttack = card.attributes.attack;
+				this.myLife = card.attributes.life;
+				this.hisAttack = randomCard.attributes.attack;
+				this.hisLife = randomCard.attributes.life;
+
+				if(this.resultado === true) {
+					this.hisDamage = this.hisLife -= this.myAttack;
+				}
+				else {
+					this.myDamage = this.myLife -= this.hisAttack;
+				}
+				console.log('Su daño', this.hisDamage);
+				console.log('Mi daño', this.myDamage);
+
 				/* Paga el coste de la carta con favor */
-				this.player.playerAfavor -= card.attributes.favor;
-				this.player.playerBfavor -= randomCard.attributes.favor;
+				this.playerA.favor -= card.attributes.favor;
+				this.playerB.favor -= randomCard.attributes.favor;
+			},
+			cardDisponible(id,cards) {
+				var card = cards.filter(card => card.id == id)[0];
+
+				if(card.attributes.favor > this.playerA.favor) {
+					this.cardAvailable = false;
+				}
+				else {
+					this.cardAvailable = true;
+				}
+				console.log('las cartas son disponibles?', this.cardAvailable);
 			},
 			applyLifeChanges() {
 				if(this.resultado === true) {
-					this.player.playerBlife -= 50;
-					this.player.playerAfavor += 10;
-					this.player.playerBfavor += 10;
+					this.playerB.life -= this.hisDamage;
+					this.playerA.favor += 1;
+					this.playerB.favor += 1;
 				}
 				else {
-					this.player.playerAlife -= 50;
-					this.player.playerAfavor += 10;
-					this.player.playerBfavor += 10;
+					this.playerA.life -= this.myDamage;
+					this.playerA.favor += 1;
+					this.playerB.favor += 1;
 				}
-				
 			},
+			
 			finalResult() {
 				this.finishGame = false;
 
-				if(this.player.playerAlife === 0) {
+				if(this.playerA.life <= 0) {
 					this.finishGame = true;
-					this.winner = this.player.playerBname;
+					this.winner = this.playerB.name;
 				}
-				if(this.player.playerBlife === 0) {
+				if(this.playerB.life <= 0) {
 					this.finishGame = true;
-					this.winner = this.player.playerAname;
+					this.winner = this.playerA.name;
 				}
 				console.log('termino el juego? ', this.finishGame);
 				
@@ -278,19 +356,15 @@
 					}
 				}*/
 			},
-			
-			getRandomCards(id,cards) {
-				var randomCards = [];
-				var randomCardsIds = [];
-				while (randomCards.length < 5) {
-					var randomIndex = 5;
-					if (randomCardsIds.indexOf(randomIndex) === -1) {
-						randomCardsIds.push(randomIndex);
-						randomCards.push(cards[randomIndex]);
-					}
-				}
-				return randomCards;
-				console.log('la mano es', randomCards);
+
+			/* Reset de la partida*/
+			newGame(cards) {
+				this.finishGame = false;
+				this.playerA.life = 100;
+				this.playerB.life = 100;
+				this.playerA.favor = 10;
+				this.playerB.favor = 10;
+				this.selectCards(cards)
 			},
 		}
 	}

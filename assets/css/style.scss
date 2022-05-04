@@ -7,7 +7,7 @@ $global-background:                              #e6dfdb;
 $global-muted-background:                        #f8f8f8 !default;
 $global-primary-background:                      #D32F2F !default;
 $global-secondary-background:                    #222 !default;
-$global-beige-background:						 $global-background;
+$global-beige-background:						 						 #a0917e;
 
 $global-life-base: #c71010;
 $global-life-glow: #850909;
@@ -25,20 +25,20 @@ $global-medium-gutter:                           40px !default;
 $global-large-gutter:                            70px !default;
 
 // Radius
-$global-radius:                     			 30px;
-$global-radius-xs:                     			 round($global-radius / 5);
-$global-radius-s:                     			 round($global-radius / 3);
-$global-radius-m:                     			 round($global-radius / 1.7);
-$global-radius-l:                     			 round($global-radius * 2);
+$global-radius:                     			       30px;
+$global-radius-xs:                     			     round($global-radius / 5);
+$global-radius-s:                     			     round($global-radius / 3);
+$global-radius-m:                     			     round($global-radius / 1.7);
+$global-radius-l:                     			     round($global-radius * 2);
 $border-rounded-border-radius:                   $global-radius-m;
 
-$global-font-family:                             'Alegreya Sans', sans-serif;
 $global-font-size:                               18px !default;
-$base-heading-font-family:                       'Old Fenris',Times New Roman,serif;
+$global-font-family:                             'Alegreya Sans', sans-serif;
+$base-heading-font-family:                     	 'Old Fenris',Times New Roman,serif;
 
 
 // Card
-$card-default-background:						 $global-beige-background;
+$card-default-background:												 $global-beige-background;
 
 // Progress
 $progress-background:                            #d3baba;
@@ -75,10 +75,10 @@ $modal-dialog-width:                             800px !default;
 
 // NUXT transition
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
+	transition: opacity .5s
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0
+	opacity: 0
 }
 .page-enter-active,
 .page-leave-active {
@@ -180,29 +180,25 @@ $modal-dialog-width:                             800px !default;
 	}
 }
 .card-character {
-	position: relative;
-	box-shadow: inset 0 0 0 10px #fff7f3, 0 4px 6px rgba(0,0,0, 0.2);
-	user-select: none;
-	border: solid 1px #767676;
-	aspect-ratio: 5 / 7;
-	
 	height: 448px;
-	.card-favor {
+	aspect-ratio: 5 / 7;
+	position: relative;
+	box-shadow: inset 0 0 0 10px #000;
+	filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
+	user-select: none;
+	border: 0;
+	.card-circle {
 		position: absolute;
-		top: -5px;
-		left: -5px;
-		text-align: right;
 		border-radius: 100%;
 		width: 40px;
 		height: 40px;
 		padding: 10px;
+		text-align: center;
+		border: solid 3px;
+		text-shadow: 0 2px 3px rgba(#000, 0.8);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: $global-favor-base;
-		box-shadow: inset 0 0 20px $global-favor-glow, 0 0 20px $global-favor-glow;
-		border: solid 3px #fff;
-		text-shadow: 0 2px 3px rgba(#000, 0.8);
 		* {
 			color: #fff;
 			letter-spacing: -1px;
@@ -220,16 +216,33 @@ $modal-dialog-width:                             800px !default;
 			z-index: 2;
 		}
 	}
+	.card-favor {
+		top: -5px;
+		left: -5px;
+		background-color: $global-favor-base;
+		box-shadow: inset 0 0 20px $global-favor-glow, 0 0 20px $global-favor-glow;
+		border-color: #fff;
+	}
+	.card-attack {
+		bottom: -5px;
+		left: -5px;
+		background-color: $global-warning-background;
+	}
+	.card-life {
+		bottom: -5px;
+		right: -5px;
+		background-color: $global-danger-background;
+	}
 	.card-art {
-		background-color: $global-secondary-background;
-		//background-image: url('@/assets/img/zeus.webp');
-		background-size: cover;
-		border-radius: $global-radius-s;
-		@media (min-width: $breakpoint-medium) {
-			border-radius: $global-radius-s;
-		}
 		img {
-			//opacity: 0;
+			aspect-ratio: 3 / 2;
+			object-fit: cover;
+			background-color: $global-secondary-background;
+			border: solid 1px $global-secondary-background;
+			border-radius: $global-radius-s;
+			@media (min-width: $breakpoint-medium) {
+				border-radius: $global-radius-s;
+			}
 		}
 	}
 	.card-info {
@@ -306,11 +319,10 @@ $modal-dialog-width:                             800px !default;
 				align-items: flex-start;
 			}
 			.player-hand {
-				top: -150px;
+				top: -200px;
 				height: fit-content;
 				.player-hand-grid {
 					.card-character {
-						box-shadow: inset 0 0 0 10px #fff7f3, 0 2px 5px rgba(0,0,0, 0.2);
 						background-color: $global-primary-background;
 
 						&:nth-child(1) {
@@ -343,7 +355,7 @@ $modal-dialog-width:                             800px !default;
 				.player-hand-grid {
 					.card-character {
 						&:hover {
-							box-shadow: inset 0 0 0 10px #fff7f3, 0 7px 25px rgba(0,0,0,0.25);
+							filter: drop-shadow(0 7px 25px rgba(0,0,0, 1));
 							transform: scale(1.7) translateY(-280px);
 							z-index: 1;
 							margin-left: 0;
@@ -479,7 +491,7 @@ $modal-dialog-width:                             800px !default;
 			position: absolute;
 			left: 0;
 			right: 0;
-			bottom: -100px;
+			bottom: -120px;
 			z-index: 2;
 
 			.player-hand-grid {
@@ -488,33 +500,26 @@ $modal-dialog-width:                             800px !default;
 
 				.card-character {
 					margin-left: -7rem;
-					box-shadow: inset 0 0 0 10px #fff7f3,  -10px 4px 20px rgba(0,0,0, 0.3);
 					transition: ease 0.5s;
 					transform: scale(1) translateY(0px);
-					zoom: 0.5;
+					zoom: 0.6;
 					transform-origin: 50% 50%;
 
 					&:nth-child(1) {
 						margin-left: 0;
-						transform: rotate(-13deg);
-					}
-					&:nth-child(2) {
 						transform: rotate(-8deg) translateY(-65px);
 					}
-					&:nth-child(3) {
+					&:nth-child(2) {
 						transform: rotate(-4deg) translateY(-100px);
 					}
-					&:nth-child(4) {
+					&:nth-child(3) {
 						transform: rotate(0deg) translateY(-120px);
 					}
-					&:nth-child(5) {
+					&:nth-child(4) {
 						transform: rotate(4deg) translateY(-100px);
 					}
-					&:nth-child(6) {
+					&:nth-child(5) {
 						transform: rotate(8deg) translateY(-65px);
-					}
-					&:nth-child(7) {
-						transform: rotate(13deg);
 					}
 				}
 			}
