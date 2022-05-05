@@ -6,13 +6,16 @@ $global-background:                              #e6dfdb;
 
 $global-muted-background:                        #f8f8f8 !default;
 $global-primary-background:                      #D32F2F !default;
-$global-secondary-background:                    #222 !default;
-$global-beige-background:						 						 #a0917e;
+$global-secondary-background:                    #343333 !default;
+$global-beige-background:						 #9f8f80;
 
 $global-life-base: #c71010;
 $global-life-glow: #850909;
 $global-favor-base: #03A9F4;
 $global-favor-glow: #00fff3;
+
+$greek-base: #7e9eb2;
+$norse-base: #765517;
 
 $global-success-background:                      #32d296 !default;
 $global-warning-background:                      #faa05a !default;
@@ -120,42 +123,40 @@ $modal-dialog-width:                             800px !default;
 
 // Buttons
 .uk-button {
-	border-radius: $global-radius-xs;
+	//transition: ease 0.3s;
 	font-family: $base-heading-font-family;
+	&:focus {
+		transform: translateY(2px);
+	}
+	&:disabled {
+		filter: grayscale(1);
+	}
 	&.uk-button-large {
 		font-size: 1.3rem;
 	}
-	&.uk-button-game {
-		background: linear-gradient(180deg, rgba(164,19,19,1) 0%, rgba(211,47,47,1) 52%, rgba(201,25,25,1) 54%, rgba(111,16,16,1) 100%);
-		border: solid 1px #000;
-		box-shadow:
-		inset 0 2px 2px rgba(#fff, 0.3),
-		inset -2px -2px 2px rgba(#000, 0.4),
-		inset 0 0 12px rgba(#000, 0.7),
-		0 0 0 3px #d3b445,
-		0 0 0 4px #000,
-		0 3px 7px rgba(#000, 0.1),
-		0 5px 10px rgba(#000, 0.2)
-		;
-		text-shadow: 0 2px 3px rgba(#000, 0.8);
-		border-radius: 2px;
-		filter: brightness(0.8) contrast(1.1);
-		&:hover {
-			filter: brightness(1) contrast(1);
-		}
-	}
 	&.uk-button-action {
-		background-color: blue;
-		background: linear-gradient(180deg, rgba(164,19,19,1) 0%, rgba(211,47,47,1) 52%, rgba(201,25,25,1) 54%, rgba(111,16,16,0.8) 100%);
-		border: solid 1px rgba(#000, 0.8);
-		box-shadow:
-		inset 1px 2px 2px rgba(#fff, 0.5),
-		inset -2px -2px 2px rgba(#000, 0.3),
-		inset 0 0 12px rgba(#000, 0.5),
-		0 3px 7px rgba(#000, 0.1);
-		text-shadow: 0 2px 3px rgba(#000, 0.8);
-		&:disabled {
-			filter: grayscale(1);
+		position: relative;
+		color: #fff;
+		background: linear-gradient(180deg, rgba(164,19,19,1) 0%, rgba(201,25,25,1) 100%);
+		box-shadow: inset 0 0 0 1px rgba(#fff, 0.7), 0 0 0 1px #000;
+		text-shadow: 0 1px 2px rgba(#000, 0.8);
+		&:hover {
+			text-shadow: 0 2px 3px rgba(#000, 0.8);
+		}
+		&:before, &:after {
+			content: "";
+			position: absolute;
+			top: calc(50% - 3px);
+			left: 15px;
+			width: 6px;
+			height: 6px;
+			background: #fff;
+			transform: rotate(45deg);
+			box-shadow: 1px 1px 1px rgba(#000, 0.5);
+		}
+		&:after {
+			left: unset;
+			right: 15px;
 		}
 	}
 }
@@ -185,10 +186,18 @@ $modal-dialog-width:                             800px !default;
 	height: 448px;
 	aspect-ratio: 5 / 7;
 	position: relative;
-	box-shadow: inset 0 0 0 10px #000;
-	filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
+	//box-shadow: inset 0 0 0 10px #000;
+	filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.8));
 	user-select: none;
-	border: 0;
+	border: 1px solid #000;
+	background-color: $global-secondary-background;
+	border-radius: $global-radius-s;
+	display: flex;
+	flex-direction: column;
+	//justify-content: space-between;
+	@media (min-width: $breakpoint-medium) {
+		border-radius: $global-radius-m;
+	}
 	.card-circle {
 		position: absolute;
 		border-radius: 100%;
@@ -196,34 +205,25 @@ $modal-dialog-width:                             800px !default;
 		height: 40px;
 		padding: 10px;
 		text-align: center;
-		border: solid 3px;
 		text-shadow: 0 2px 3px rgba(#000, 0.8);
+		box-shadow: 0 2px 5px rgba(#000, 0.9);
+		background-size: cover;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		z-index: 1;
 		* {
 			color: #fff;
 			letter-spacing: -1px;
 		}
-		&:before {
-			content: "";
-			position: absolute;
-			top: 3px;
-			left: 15px;
-			width: 40%;
-			height: 40%;
-			border-radius: 50%;
-			background: radial-gradient(circle at 50% 0px, #ffffff, rgba(255, 255, 255, 0) 58%);
-			filter: blur(2px);
-			z-index: 2;
-		}
 	}
 	.card-favor {
-		top: -5px;
-		left: -5px;
+		width: 45px;
+		height: 45px;
+		top: -10px;
+		left: -10px;
 		background-color: $global-favor-base;
-		box-shadow: inset 0 0 20px $global-favor-glow, 0 0 20px $global-favor-glow;
-		border-color: #fff;
+		background-image: url('~/assets/img/circle-favor.png');
 		&.card-favor-diseabled {
 			filter: grayscale(1);
 		}
@@ -232,34 +232,82 @@ $modal-dialog-width:                             800px !default;
 		bottom: -5px;
 		left: -5px;
 		background-color: $global-warning-background;
+		background-image: url('~/assets/img/circle-attack.png');
 	}
 	.card-life {
 		bottom: -5px;
 		right: -5px;
 		background-color: $global-danger-background;
+		background-image: url('~/assets/img/circle-life.png');
 	}
 	.card-art {
 		img {
-			aspect-ratio: 3 / 2;
+			aspect-ratio: 8 / 7;
 			object-fit: cover;
-			background-color: $global-secondary-background;
-			border: solid 1px $global-secondary-background;
-			border-radius: $global-radius-s;
-			@media (min-width: $breakpoint-medium) {
-				border-radius: $global-radius-s;
-			}
+			border: solid 1px rgba(#fff, 0.5);
+			box-shadow: 0 0 5px #000;
 		}
 	}
 	.card-info {
-		border-radius: $global-radius-s;
-		@media (min-width: $breakpoint-medium) {
-			border-radius: $global-radius-s;
+		padding: $global-gutter $global-gutter $global-small-gutter $global-gutter;
+		height: inherit;
+		border: solid 1px rgba(#fff, 0.5);
+		box-shadow: 0 0 5px #000;
+		background-color: $global-beige-background;
+		position: relative;
+		display: flex;
+		align-items: center;
+		.card-name {
+			width: calc(100% + 20px);
+			color: #fff;
+			background-color: $greek-base;
+			background: linear-gradient(90deg, rgba(#000,0.5) 0%, rgba(#000,0) 50%, rgba(#000,0.5) 100%);
+			position: absolute;
+			top: -10px;
+			left: -10px;
+			right: -10px;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+			text-shadow: 0 2px 3px rgba(#000, 0.8);
+			box-shadow: inset 0 0 0 1px rgba(#fff, 0.3), 0 0 5px #000;
 		}
 		.card-description {
+			width: 100%;
+			color: #000;
 			display: -webkit-box;
-			-webkit-line-clamp: 2;
+			-webkit-line-clamp: 3;
 			-webkit-box-orient: vertical;  
 			overflow: hidden;
+		}
+		.uk-button-action {
+			padding-left: 30px;
+			padding-right: 30px;
+			margin: auto;
+			width: fit-content;
+			position: absolute;
+			bottom: -20px;
+			left: 0;
+			right: 0;
+		}
+	}
+	&.Griega {
+		.card-art {
+			img {
+				background-color: $greek-base;
+			}
+		}
+		.card-name {
+			background-color: $greek-base;
+		}
+	}
+	&.Nórdica {
+		.card-art {
+			img {
+				background-color: $norse-base;
+			}
+		}
+		.card-name {
+			background-color: $norse-base;
 		}
 	}
 }
@@ -270,7 +318,7 @@ $modal-dialog-width:                             800px !default;
 }
 #PlayStage {
 	user-select: none;
-	height: calc(100vh - 80px);
+	height: 100vh;
 	overflow: hidden;
 	.player-area {
 		position: relative;
@@ -324,25 +372,25 @@ $modal-dialog-width:                             800px !default;
 				align-items: flex-start;
 			}
 			.player-hand {
-				top: -200px;
+				top: -250px;
 				height: fit-content;
 				.player-hand-grid {
 					.card-character {
 						background-color: $global-primary-background;
 						&:nth-child(1) {
-							transform: rotate(8deg) translateY(65px);
+							transform: scale(0.6) rotate(8deg) translateY(65px);
 						}
 						&:nth-child(2) {
-							transform: rotate(4deg) translateY(100px);
+							transform: scale(0.6) rotate(4deg) translateY(100px);
 						}
 						&:nth-child(3) {
-							transform: rotate(0deg) translateY(115px);
+							transform: scale(0.6) rotate(0deg) translateY(115px);
 						}
 						&:nth-child(4) {
-							transform: rotate(-4deg) translateY(100px);
+							transform: scale(0.6) rotate(-4deg) translateY(100px);
 						}
 						&:nth-child(5) {
-							transform: rotate(-8deg) translateY(65px);
+							transform: scale(0.6) rotate(-8deg) translateY(65px);
 						}
 					}
 				}
@@ -353,10 +401,9 @@ $modal-dialog-width:                             800px !default;
 				.player-hand-grid {
 					.card-character {
 						&:hover {
-							filter: drop-shadow(0 7px 25px rgba(0,0,0, 1));
-							transform: scale(1.7) translateY(-280px);
+							filter: drop-shadow(0 15px 15px rgba(0,0,0, 0.7));
+							transform: scale(1) translateY(-280px);
 							z-index: 1;
-							margin-left: 0;
 						}
 					}
 				}
@@ -378,7 +425,7 @@ $modal-dialog-width:                             800px !default;
 				align-items: center;
 				justify-content: center;
 				transform: rotate(5deg);
-				box-shadow: inset 0 0 0 3px #fff7f3, 0 2px 5px rgba(0,0,0, 0.2);
+				box-shadow: inset 0 0 0 4px $global-secondary-background, 0 2px 5px rgba(0,0,0, 0.2);
 			}
 			.player-cementery {
 				transform: rotate(-5deg);
@@ -489,7 +536,7 @@ $modal-dialog-width:                             800px !default;
 			position: absolute;
 			left: 0;
 			right: 0;
-			bottom: -120px;
+			bottom: -200px;
 			z-index: 2;
 
 			.player-hand-grid {
@@ -497,27 +544,27 @@ $modal-dialog-width:                             800px !default;
 				justify-content: center;
 
 				.card-character {
-					margin-left: -7rem;
+					margin-left: -10rem;
 					transition: ease 0.5s;
 					transform: scale(1) translateY(0px);
-					zoom: 0.6;
+					//zoom: 0.6;
 					transform-origin: 50% 50%;
 
 					&:nth-child(1) {
 						margin-left: 0;
-						transform: rotate(-8deg) translateY(-65px);
+						transform: scale(0.6) rotate(-8deg) translateY(-65px);
 					}
 					&:nth-child(2) {
-						transform: rotate(-4deg) translateY(-100px);
+						transform: scale(0.6) rotate(-4deg) translateY(-100px);
 					}
 					&:nth-child(3) {
-						transform: rotate(0deg) translateY(-120px);
+						transform: scale(0.6) rotate(0deg) translateY(-120px);
 					}
 					&:nth-child(4) {
-						transform: rotate(4deg) translateY(-100px);
+						transform: scale(0.6) rotate(4deg) translateY(-100px);
 					}
 					&:nth-child(5) {
-						transform: rotate(8deg) translateY(-65px);
+						transform: scale(0.6) rotate(8deg) translateY(-65px);
 					}
 				}
 			}

@@ -1,7 +1,6 @@
 <template>
-	<div class="uk-background-dark">
-		<Navigation/>
+	<div class="uk-background-dark uk-position-relative">
+		<PlayNavigation/>
 		<Nuxt/>
-		<!-- <PlayBar/> -->
 	</div>
 </template>

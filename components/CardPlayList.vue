@@ -1,6 +1,6 @@
 <template>
 	<div class="player-hand-grid">
-		<article class="card-character uk-card uk-card-default uk-card-small uk-card-body uk-text-center" v-for="card in listCards" v-bind:key="card.attributes.id" v-bind:class="card.attributes.culture">
+		<article class="card-character uk-card uk-card-small uk-card-body uk-text-center" v-bind:class="card.attributes.culture.data.attributes.name"v-for="card in listCards" v-bind:key="card.attributes.id" >
 			<div class="card-circle card-favor" v-bind:class="{ 'card-favor-diseabled' : card.attributes.favor > playerA.favor}">
 				<h3 class="uk-margin-remove">
 					{{ card.attributes.favor }}
@@ -17,31 +17,33 @@
 				</h3>
 			</div>
 
-			<figure class="card-art uk-margin-remove-top uk-margin-small-bottom">
+			<figure class="card-art uk-margin-remove">
 				<img class="uk-margin-remove-bottom" width="100%" :src="api_url + card.attributes.cover.data.attributes.url" :alt="card.attributes.title" />
 			</figure>
 
 
 			<div class="card-info">
-				<h3 class="uk-h2 uk-margin-remove">
-					{{card.attributes.title}} <img src="@/assets/img/greek.png" width="30">
+				<h3 class="uk-margin-remove card-name uk-h4">
+					{{card.attributes.title}}
 				</h3>
-				<p class="uk-text-muted uk-h4 uk-margin-remove uk-hidden">
-					Cultura {{ card.attributes.culture.data.attributes.name }}
-				</p>
-				<p class="uk-margin-small-top card-description">
+				<p class="uk-margin-remove card-description uk-text-small">
 					{{ card.attributes.shortDescription }}
 				</p>
-			</div>
-			
-			<button v-on:click="$emit('playCard',card.id)" class="uk-button uk-button-primary uk-button-action" uk-toggle="#modal-resultado" v-if="playerA.favor > card.attributes.favor">
-				Jugar Carta
-			</button>
-			<button class="uk-button uk-button-primary uk-button-action" v-else disabled>
-				Jugar Carta
-			</button>
-		</article>
-	</div>
+
+				<button class="uk-button uk-button-action uk-button-small" v-if="card.attributes.favor > playerA.favor" disabled>
+					Sin Favor
+				</button>
+				<button v-on:click="$emit('playCard',card.id)" class="uk-button uk-button-action uk-button-small" uk-toggle="#modal-resultado" v-else>
+					Jugar
+				</button>
+				
+
+				<!-- <button v-on:click="$emit('playCard',card.id)" class="uk-button uk-button-primary uk-button-action" uk-toggle="#modal-resultado">
+					Jugar Carta
+				</button> -->
+		</div>
+	</article>
+</div>
 </template>
 
 <script>
@@ -52,7 +54,7 @@
 		name: 'CardPlayList',
 		props: {
 			cards: Array,
-			//playerA: Array,
+			//playerA: Object,
 		},
 		data() {
 			return {
